@@ -1,0 +1,12 @@
+{
+  "name": "api.medigital",
+  "version": "1.0.0",
+  "description": "API for medigital.ml",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
