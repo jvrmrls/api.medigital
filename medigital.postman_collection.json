@@ -1,0 +1,600 @@
+{
+	"info": {
+		"_postman_id": "0698f69a-bb01-4097-819b-ec9f514e1c71",
+		"name": "medigital",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18543721"
+	},
+	"item": [
+		{
+			"name": "patients",
+			"item": [
+				{
+					"name": "getAllPatients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/patients",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificPatient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/patients/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"patients",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "6342cbd7d1a9f8c8aa82e40d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createPatients",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"Javier Alexander\",\r\n      \"lastName\": \"Morales Melara\",\r\n      \"phoneNumber\": [\"7270-9725\"],\r\n      \"birthday\": \"1999-07-18\",\r\n      \"gender\": \"M\",\r\n      \"dui\": \"05904669-7\",\r\n      \"address\": \"Col Ciudad Real, Casa 7\",\r\n      \"department\": \"6342c59e5b496ddd71c1c0f7\",\r\n      \"municipality\": \"6342c6e25b496ddd71c1c108\",\r\n      \"maritalStatus\": \"SINGLE\",\r\n      \"bloodType\": \"O-\",\r\n      \"familyHistory\":\"\",\r\n      \"personalHistory\":\"\",\r\n      \"responsibles\":[]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/patients",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePatient",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"Javier Alexander\",\r\n      \"lastName\": \"Morales Melara\",\r\n      \"phoneNumber\": [\"7270-9724\"],\r\n      \"birthday\": \"1999-07-18\",\r\n      \"gender\": \"M\",\r\n      \"dui\": \"05904669-7\",\r\n      \"address\": \"Col Ciudad Real, Casa 7\",\r\n      \"maritalStatus\": \"SINGLE\",\r\n      \"bloodType\": \"O-\",\r\n      \"familyHistory\":\"\",\r\n      \"personalHistory\":\"\",\r\n      \"responsibles\":[\r\n        {\r\n            \"first_name\": \"Edgar Antonio\",\r\n            \"last_name\": \"Reyes Ceron\",\r\n            \"phone_number\": [\"7966-8900\"],\r\n            \"kinship\": \"FRIEND\"\r\n        },\r\n        {\r\n            \"first_name\": \"Keny Lisbeth\",\r\n            \"last_name\": \"Chavez Torres\",\r\n            \"phone_number\": [\"7966-8910\"],\r\n            \"kinship\": \"DAUGHTER\"\r\n        }\r\n      ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/patients/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"patients",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "6342386ecc5fa18d938a5c99"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSpecificPatient",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/patients/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"patients",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "6342305f733dd6615fcabb9c"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addResponsiblePatient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Keny Lisbeth\",\r\n    \"lastName\": \"Chavez Torres\",\r\n    \"phoneNumber\": [\r\n        \"7526-6938\"\r\n    ],\r\n    \"kinship\": \"HERMANA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/patients/:_id/responsibles",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"patients",
+								":_id",
+								"responsibles"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "63424db2f9e17c1322327488"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteResponsiblePatient",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/patients/:_id/responsibles/:responsible",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"patients",
+								":_id",
+								"responsibles",
+								":responsible"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "63424db2f9e17c1322327488"
+								},
+								{
+									"key": "responsible",
+									"value": "63424fd8357013ac42c5d2ce"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "municipalities",
+			"item": [
+				{
+					"name": "getAllMunicipalities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/municipalities",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"municipalities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificMunicipality",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/municipalities/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"municipalities",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "6342c6e25b496ddd71c1c10b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificByCodeMunicipalities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/municipalities/code/:code",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"municipalities",
+								"code",
+								":code"
+							],
+							"variable": [
+								{
+									"key": "code",
+									"value": "104"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "departments",
+			"item": [
+				{
+					"name": "getAllDepartments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/departments",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"departments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificDepartment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/departments/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"departments",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "6342c59e5b496ddd71c1c0fc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificByCodeDepartment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/departments/code/:code",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"departments",
+								"code",
+								":code"
+							],
+							"variable": [
+								{
+									"key": "code",
+									"value": "05"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "common-user",
+			"item": [
+				{
+					"name": "getAllCommonUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/common-users",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"common-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificCommonUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/common-users/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"common-users",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createCommonUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Javier Alexander\",\r\n    \"lastName\" : \"Morales Melara\",\r\n    \"email\": \"javiermoralesmelara@gmail.com\",\r\n    \"platform\": \"GOOGLE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/common-users",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"common-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authCommonUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"platform\": \"GOOGLE\",\r\n    \"tokenId\":\"eyJhbGciOiJSUzI1NiIsImtpZCI6ImVkMzZjMjU3YzQ3ZWJhYmI0N2I0NTY4MjhhODU4YWE1ZmNkYTEyZGQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI3MzgxNTY1MjY1MjEtaXQyZTVyb2U5NGtkcTRtaW50NTRwNjA0bzE5aDNpcDYuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI3MzgxNTY1MjY1MjEtMmRpMmlsOXU2dDJnNWo1MWVmMTNvNW9rZ2UzbmQwNGUuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDQyNTA2NTMxMjgxNjkwNjIzNTMiLCJlbWFpbCI6Imphdmllcm1vcmFsZXNtZWxhcmFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJKYXZpZXIgQWxleGFuZGVyIE1vcmFsZXMgTWVsYXJhIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FMbTV3dTJQekNGWl8xaHdvRGRQYmgxR3VPdXZhWUhxTFVrLS14dk9oWTdja2c9czk2LWMiLCJnaXZlbl9uYW1lIjoiSmF2aWVyIEFsZXhhbmRlciIsImZhbWlseV9uYW1lIjoiTW9yYWxlcyBNZWxhcmEiLCJsb2NhbGUiOiJlcy00MTkiLCJpYXQiOjE2NjUzMzM2NDksImV4cCI6MTY2NTMzNzI0OX0.A9B1zQX0Nv0Im_PTA6gn2xbUp_qGyfAV7MJUtJyFXe8QB11oIAV6ODIueOz9IPcU3YDg4eqOx09xHGVaaC48K19YXjSzUlA6ulz0xFUn6xTN_6SNdZmHjaPHdiRDit-wlivKOCIxes-LJP8BorqhYIc-DzYAt69jvod3Hc6vRpOXc-GB9vItJvTlPkWyK1DgBIiHF3HvZGRRE2_5rtIRltj3dRRxDjkA0zbRt_uFVIFmTv6nSBAwLKDwhi0t8YsH2AVO6eMUi6Qepv_9RPNItWV70NZMDPAe6k6iRFHiwkhY-XWvjAiK2RwKMyzJa-4BVRGkQfsIJbKYatk9ycr_MA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/common-users/auth",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"common-users",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "dates",
+			"item": [
+				{
+					"name": "getAllDates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/dates",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"dates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificDate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/dates/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"dates",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "63434800a31559ffdbf3b048"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createDate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Oscar Alexis Chavez Torres\",\r\n    \"date\": \"2022-10-12\",\r\n    \"hour\": \"11:01\",\r\n    \"reason\": \"Dolor de estomago\",\r\n    \"bookedBy\": \"6342f98588d2f87828edc3cf\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/dates",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"dates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateDate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Oscar Alexis Chavez Torres\",\r\n    \"date\": \"2022-10-12\",\r\n    \"hour\": \"11:01\",\r\n    \"reason\": \"Dolor de estomago\",\r\n    \"status\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/dates/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"dates",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "63434a6e57e0888e676b85ac"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSpecificDate",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/dates/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"dates",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "63434ee8bbdd9e840a6a24c8"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "http://localhost:3001/api",
+			"type": "string"
+		}
+	]
+}

@@ -16,6 +16,7 @@ import PatientController from './controllers/PatientController.js'
 import MunicipalityController from './controllers/MunicipalityController.js'
 import DepartmentController from './controllers/DepartmentController.js'
 import CommonUserController from './controllers/CommonUserController.js'
+import DateController from './controllers/DateController.js'
 
 /**
  * REQUIRED CONSTANTS
@@ -40,6 +41,7 @@ app.use('/api/patients', PatientController)
 app.use('/api/municipalities', MunicipalityController)
 app.use('/api/departments', DepartmentController)
 app.use('/api/common-users', CommonUserController)
+app.use('/api/dates', DateController)
 
 /**
  * LISTENING APP

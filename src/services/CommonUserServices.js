@@ -48,7 +48,7 @@ export async function create(req, res) {
     )
     await _commonUser.save()
     /* Returning the response to the client. */
-    return res.status(200).json(_commonUser)
+    return res.status(201).json(_commonUser)
   } catch (err) {
     /* Returning the response to the client. */
     return res.status(500).json(err)
@@ -89,7 +89,7 @@ export async function auth(req, res) {
         console.log('logged by facebook')
         break
       case 'NATIVE':
-        console.log('logged by NATIVE')
+        isVerified = true
         break
       default:
         return res
@@ -103,20 +103,29 @@ export async function auth(req, res) {
         .json({ message: 'No se validó el inicio de sesión' })
     }
     // FIND USER ON DATABASE
-    let _commonUser = await findUserOnDatabase(email, platform)
-    // IF USER DOESNT EXISTS, IT WILL BE CREATED
-    if (!_commonUser) {
-      const _commonUserSchema = instanceUserSchema(
-        firstName,
-        lastName,
-        email,
-        password,
-        avatar,
-        platform
-      )
-      await _commonUserSchema.save()
-      _commonUser = _commonUserSchema
+    const _commonUser = await findOrCreateUserOnDatabase({
+      firstName,
+      lastName,
+      email,
+      password,
+      avatar,
+      platform
+    })
+
+    // IF THE COMMON USER HAS ALREADY AN ACCOUNT WITH OTHER PLATFORM
+    if (_commonUser.platform !== platform) {
+      return res
+        .status(400)
+        .json({ message: 'Usuario ya registrado con otra plataforma' })
     }
+    // IF THE COMMON USER PLATFORM IS NATIVE, VALIDATE PASSWORD
+    if (platform === 'NATIVE') {
+      // COMPARE PASSWORDS
+      if (_commonUser.password !== password) {
+        return res.status(400).json({ message: 'Credenciales incorrectas' })
+      }
+    }
+
     return res.status(200).json(_commonUser)
   } catch (err) {
     /* Returning the response to the client. */
@@ -124,35 +133,37 @@ export async function auth(req, res) {
   }
 }
 
-const instanceUserSchema = (
-  firstName,
-  lastName,
-  email,
-  password,
-  avatar,
-  platform
-) => {
+const instanceUserSchema = (values) => {
   const _commonUser = CommonUserModel({
-    first_name: firstName,
-    last_name: lastName,
-    email,
-    password,
-    avatar,
-    platform
+    first_name: values.firstName,
+    last_name: values.lastName,
+    email: values.email,
+    password: values.password,
+    avatar: values.avatar,
+    platform: values.platform
   })
   return _commonUser
 }
 
-const findUserOnDatabase = (email, platform) => {
+const findOrCreateUserOnDatabase = (values) => {
   return new Promise((resolve, reject) => {
-    CommonUserModel.find({ email, platform })
+    CommonUserModel.findOne({ email: values.email })
       .then((data) => {
-        if (data.length > 0) resolve(data)
-        else resolve(false)
+        // IF THE COMMON USER DOESNT EXISTS, CREATE IT
+        if (data.length == 0) {
+          const _commonUserSchema = instanceUserSchema(values)
+          _commonUserSchema
+            .save()
+            .then((content) => resolve(content))
+            .catch((err) => reject(err))
+        }
+        resolve(data)
       })
       .catch((err) => reject(err))
   })
 }
+
+const createToken = (email) => {}
 
 /**
  * It takes a tokenId, and returns a promise that resolves to a data object, or

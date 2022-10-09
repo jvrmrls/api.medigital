@@ -1,5 +1,6 @@
 import { validationResult } from 'express-validator'
 import mongoose from 'mongoose'
+import _ from 'lodash'
 
 // Import model
 import PatientModel from '../models/PatientModel.js'
@@ -77,7 +78,7 @@ export async function create(req, res) {
     })
     await _patient.save()
     /* Returning the response to the client. */
-    return res.status(200).json(_patient)
+    return res.status(201).json(_patient)
   } catch (err) {
     /* Returning the response to the client. */
     return res.status(500).json(err)
@@ -123,9 +124,13 @@ export async function update(req, res) {
       personal_history: personalHistory,
       responsibles
     }
-    const _data = await PatientModel.findByIdAndUpdate(_id, _patient, {
-      new: true
-    })
+    const _data = await PatientModel.findByIdAndUpdate(
+      _id,
+      _.omitBy(_patient, _.isNull),
+      {
+        new: true
+      }
+    )
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {

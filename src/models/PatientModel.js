@@ -73,7 +73,8 @@ const patientSchema = Schema(
     }
   },
   {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
   }
 )
 /* Creating a model called Patient. */
