@@ -11,6 +11,9 @@
 import express from 'express'
 import 'dotenv/config'
 
+import conn from './database/mongo.js'
+import PatientController from './controllers/PatientController.js'
+
 /**
  * REQUIRED CONSTANTS
  **/
@@ -22,12 +25,15 @@ const port = process.env.PORT || 3000
 
 const app = express()
 
+// CONNECT TO DB
+conn()
+// Setting the configuration for the application
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 /**
  * ENDPOINTS TO SET THE RESPECTIVE CONTROLLER
  */
-app.get('/', (req, res) => {
-  res.json('Hello world')
-})
+app.use('/api/patients', PatientController)
 
 /**
  * LISTENING APP

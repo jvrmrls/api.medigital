@@ -36,21 +36,21 @@ const patientSchema = Schema(
     },
     department: {
       type: Schema.Types.ObjectId,
-      ref: 'Department',
-      required: true
+      ref: 'Department'
     },
     municipality: {
       type: Schema.Types.ObjectId,
-      ref: 'Municipality',
-      required: true
+      ref: 'Municipality'
     },
     marital_status: {
       type: String,
-      enum: ['MARRIED', 'WIDOWED', 'SEPARATED', 'DIVORCED', 'SINGLE']
+      enum: ['MARRIED', 'WIDOWED', 'SEPARATED', 'DIVORCED', 'SINGLE', 'N/D'],
+      default: 'N/D'
     },
     blood_type: {
       type: String,
-      enum: ['A+', 'A-', 'B+', 'B-', 'O+', 'O-']
+      enum: ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'N/D'],
+      default: 'N/D'
     },
     family_history: {
       type: String,
@@ -60,41 +60,14 @@ const patientSchema = Schema(
       type: String,
       default: ''
     },
-    responsibles: [
-      {
-        id: {
-          type: Schema.Types.ObjectId,
-          ref: 'Responsible'
-        },
-        kinship: {
-          type: String,
-          enum: [
-            'MOTHER',
-            'FATHER',
-            'BROTHER',
-            'SISTER',
-            'SON',
-            'DAUGHTER',
-            'GRANDSON',
-            'GRANDDAUGHTER',
-            'UNCLE',
-            'AUNT',
-            'GRANDMOTHER',
-            'GRANDFATHER',
-            'MOTHER IN LAW',
-            'FATHER IN LAW',
-            'BROTHER IN LAW',
-            'SISTER IN LAW',
-            'FRIEND',
-            'KNOWN'
-          ],
-          required: true
-        }
-      }
-    ],
+    responsibles: {
+      type: Array,
+      default: []
+    },
     status: {
       type: String,
-      enum: ['ACTIVE', 'INACTIVE']
+      enum: ['ACTIVE', 'INACTIVE'],
+      default: 'ACTIVE'
     }
   },
   {
