@@ -10,10 +10,12 @@ import PatientModel from '../models/PatientModel.js'
  * @param res - The response object.
  * @returns The response to the client.
  */
-export async function getAll (req, res) {
+export async function getAll(req, res) {
   try {
     /* A query to the database. */
     const _data = await PatientModel.find({})
+      .populate('department', { _id: 0 })
+      .populate('municipality', { cantons: 0, _id: 0, postalCode: 0 })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {
@@ -22,10 +24,12 @@ export async function getAll (req, res) {
   }
 }
 
-export async function getSpecific (req, res) {
+export async function getSpecific(req, res) {
   try {
     /* A query to the database. */
     const _data = await PatientModel.findOne(req.id)
+      .populate('department', { _id: 0 })
+      .populate('municipality', { cantons: 0, _id: 0, postalCode: 0 })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {
@@ -33,7 +37,7 @@ export async function getSpecific (req, res) {
     return res.status(500).json(err)
   }
 }
-export async function create (req, res) {
+export async function create(req, res) {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
@@ -80,7 +84,7 @@ export async function create (req, res) {
   }
 }
 
-export async function update (req, res) {
+export async function update(req, res) {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
@@ -130,7 +134,7 @@ export async function update (req, res) {
   }
 }
 
-export async function deleteSpecific (req, res) {
+export async function deleteSpecific(req, res) {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
@@ -147,7 +151,7 @@ export async function deleteSpecific (req, res) {
   }
 }
 
-export async function addResponsible (req, res) {
+export async function addResponsible(req, res) {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
@@ -175,7 +179,7 @@ export async function addResponsible (req, res) {
   }
 }
 
-export async function deleteResponsible (req, res) {
+export async function deleteResponsible(req, res) {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {

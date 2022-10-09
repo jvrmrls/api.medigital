@@ -13,6 +13,9 @@ import 'dotenv/config'
 
 import conn from './database/mongo.js'
 import PatientController from './controllers/PatientController.js'
+import MunicipalityController from './controllers/MunicipalityController.js'
+import DepartmentController from './controllers/DepartmentController.js'
+import CommonUserController from './controllers/CommonUserController.js'
 
 /**
  * REQUIRED CONSTANTS
@@ -34,6 +37,9 @@ app.use(express.urlencoded({ extended: true }))
  * ENDPOINTS TO SET THE RESPECTIVE CONTROLLER
  */
 app.use('/api/patients', PatientController)
+app.use('/api/municipalities', MunicipalityController)
+app.use('/api/departments', DepartmentController)
+app.use('/api/common-users', CommonUserController)
 
 /**
  * LISTENING APP

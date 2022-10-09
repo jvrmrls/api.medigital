@@ -36,11 +36,13 @@ const patientSchema = Schema(
     },
     department: {
       type: Schema.Types.ObjectId,
-      ref: 'Department'
+      ref: 'Department',
+      required: true
     },
     municipality: {
       type: Schema.Types.ObjectId,
-      ref: 'Municipality'
+      ref: 'Municipality',
+      required: true
     },
     marital_status: {
       type: String,

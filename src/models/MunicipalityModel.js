@@ -11,6 +11,10 @@ const municipalitySchema = Schema({
     type: String,
     required: true
   },
+  cantons: {
+    type: Number,
+    required: true
+  },
   postal_code: {
     type: String,
     required: true

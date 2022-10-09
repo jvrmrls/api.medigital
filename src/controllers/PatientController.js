@@ -24,6 +24,8 @@ router.post(
   body('phoneNumber').isArray(),
   body('birthday').isDate(),
   body('responsibles').isArray(),
+  body('department').isMongoId(),
+  body('municipality').isMongoId(),
   create
 )
 // PUT /api/patients/
@@ -34,6 +36,8 @@ router.put(
   body('lastName').notEmpty(),
   body('phoneNumber').isArray(),
   body('birthday').isDate(),
+  body('department').isMongoId(),
+  body('municipality').isMongoId(),
   body('responsibles').isArray(),
   update
 )

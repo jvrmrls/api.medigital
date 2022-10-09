@@ -3,13 +3,14 @@ module.exports = {
     browser: true,
     es2021: true
   },
-  extends: [
-    'standard'
-  ],
+  extends: ['standard'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
   rules: {
+    prettier: {
+      'space-before-function-paren': ['error', 'never']
+    }
   }
 }
