@@ -10,6 +10,7 @@
  */
 import express from 'express'
 import 'dotenv/config'
+import cors from 'cors'
 
 import conn from './database/mongo.js'
 import PatientController from './controllers/PatientController.js'
@@ -34,6 +35,7 @@ conn()
 // Setting the configuration for the application
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(cors())
 /**
  * ENDPOINTS TO SET THE RESPECTIVE CONTROLLER
  */

@@ -111,6 +111,7 @@ export async function auth(req, res) {
       avatar,
       platform
     })
+    console.log('common', _commonUser)
 
     // IF THE COMMON USER HAS ALREADY AN ACCOUNT WITH OTHER PLATFORM
     if (_commonUser.platform !== platform) {
@@ -148,14 +149,12 @@ const instanceUserSchema = (values) => {
 const findOrCreateUserOnDatabase = (values) => {
   return new Promise((resolve, reject) => {
     CommonUserModel.findOne({ email: values.email })
-      .then((data) => {
+      .then(async (data) => {
         // IF THE COMMON USER DOESNT EXISTS, CREATE IT
-        if (data.length == 0) {
+        if (!data) {
           const _commonUserSchema = instanceUserSchema(values)
-          _commonUserSchema
-            .save()
-            .then((content) => resolve(content))
-            .catch((err) => reject(err))
+          const _commonUser = await _commonUserSchema.save()
+          resolve(_commonUser)
         }
         resolve(data)
       })
