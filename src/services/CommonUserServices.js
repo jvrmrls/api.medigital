@@ -3,6 +3,9 @@ import { OAuth2Client } from 'google-auth-library'
 // Import model
 import CommonUserModel from '../models/CommonUserModel.js'
 
+// Import JWT helper
+import { createToken } from '../helpers/jwt.js'
+
 export async function getAll(req, res) {
   try {
     /* A query to the database. */
@@ -111,7 +114,6 @@ export async function auth(req, res) {
       avatar,
       platform
     })
-    console.log('common', _commonUser)
 
     // IF THE COMMON USER HAS ALREADY AN ACCOUNT WITH OTHER PLATFORM
     if (_commonUser.platform !== platform) {
@@ -126,8 +128,14 @@ export async function auth(req, res) {
         return res.status(400).json({ message: 'Credenciales incorrectas' })
       }
     }
-
-    return res.status(200).json(_commonUser)
+    // CREATE THE TOKEN
+    const _token = createToken(_commonUser)
+    return res.status(200).json({
+      credential: _token,
+      avatar: _commonUser.avatar,
+      fullName: `${_commonUser.first_name} ${_commonUser.last_name}`,
+      email: _commonUser.email
+    })
   } catch (err) {
     /* Returning the response to the client. */
     return res.status(500).json(err)
@@ -161,8 +169,6 @@ const findOrCreateUserOnDatabase = (values) => {
       .catch((err) => reject(err))
   })
 }
-
-const createToken = (email) => {}
 
 /**
  * It takes a tokenId, and returns a promise that resolves to a data object, or
