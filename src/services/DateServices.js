@@ -30,6 +30,7 @@ export async function getSpecific(req, res) {
       password: 0,
       platform: 0
     })
+    if (!_data) return res.status(400).json({ msg: 'No se encontró la cita' })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {

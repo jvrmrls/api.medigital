@@ -23,6 +23,8 @@ export async function getSpecific(req, res) {
     const { _id } = req.params
     /* A query to the database. */
     const _data = await MunicipalityModel.findOne({ _id })
+    if (!_data)
+      return res.status(400).json({ msg: 'No se encontró el municipio' })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {

@@ -79,7 +79,7 @@ export async function auth(req, res) {
         if (!payload.email_verified) {
           return res
             .status(400)
-            .json({ message: 'No se validó el inicio de sesión' })
+            .json({ msg: 'No se validó el inicio de sesión' })
         }
         // UPDATE VALUES
         isVerified = true
@@ -97,13 +97,11 @@ export async function auth(req, res) {
       default:
         return res
           .status(400)
-          .json({ message: 'No se validó la plataforma de inicio de sesión' })
+          .json({ msg: 'No se validó la plataforma de inicio de sesión' })
     }
     // if is verified continue, otherwise return 400
     if (!isVerified) {
-      return res
-        .status(400)
-        .json({ message: 'No se validó el inicio de sesión' })
+      return res.status(400).json({ msg: 'No se validó el inicio de sesión' })
     }
     // FIND USER ON DATABASE
     const _commonUser = await findOrCreateUserOnDatabase({
@@ -119,13 +117,13 @@ export async function auth(req, res) {
     if (_commonUser.platform !== platform) {
       return res
         .status(400)
-        .json({ message: 'Usuario ya registrado con otra plataforma' })
+        .json({ msg: 'Usuario ya registrado con otra plataforma' })
     }
     // IF THE COMMON USER PLATFORM IS NATIVE, VALIDATE PASSWORD
     if (platform === 'NATIVE') {
       // COMPARE PASSWORDS
       if (_commonUser.password !== password) {
-        return res.status(400).json({ message: 'Credenciales incorrectas' })
+        return res.status(400).json({ msg: 'Credenciales incorrectas' })
       }
     }
     // CREATE THE TOKEN

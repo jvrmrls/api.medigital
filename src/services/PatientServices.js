@@ -31,6 +31,8 @@ export async function getSpecific(req, res) {
     const _data = await PatientModel.findOne(req.id)
       .populate('department', { _id: 0 })
       .populate('municipality', { cantons: 0, _id: 0, postalCode: 0 })
+    if (!_data)
+      return res.status(400).json({ msg: 'No se encontró el paciente' })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {
@@ -195,9 +197,7 @@ export async function deleteResponsible(req, res) {
     /* It's checking if the responsible exists. */
     const exists = responsibles.find((element) => (element._id = responsible))
     if (!exists) {
-      return res
-        .status(400)
-        .json({ message: 'Responsable a eliminar no existe' })
+      return res.status(400).json({ msg: 'Responsable a eliminar no existe' })
     }
     /* A query to the database. */
     const _patient = await PatientModel.findOneAndUpdate(

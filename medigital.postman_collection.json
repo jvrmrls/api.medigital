@@ -307,7 +307,7 @@
 							"variable": [
 								{
 									"key": "_id",
-									"value": "6342c59e5b496ddd71c1c0fc"
+									"value": "6342c59e5b496ddd71c1c0fd"
 								}
 							]
 						}
@@ -561,6 +561,173 @@
 								{
 									"key": "_id",
 									"value": "63434ee8bbdd9e840a6a24c8"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "consults",
+			"item": []
+		},
+		{
+			"name": "prescriptions",
+			"item": [
+				{
+					"name": "getAllPrescriptions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/prescriptions/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"prescriptions",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificPrescription",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/prescriptions/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"prescriptions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "634c80f5dc92a82f0d8a44f0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createPrescription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"consult\": \"634c80f5dc92a82f0d8a44f0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/prescriptions/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"prescriptions",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createDetailPrescription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"medicine\" : \"634c8ae4d133b79506bd8036\",\r\n    \"quantity\": 20,\r\n    \"dose\": \"Una cada hora\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/prescriptions/:id/detail",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"prescriptions",
+								":id",
+								"detail"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "634c8ae4d133b79506bd8036"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDetailPrescription",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/prescriptions/:id/detail/:_idDetail",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"prescriptions",
+								":id",
+								"detail",
+								":_idDetail"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "634c80f5dc92a82f0d8a44f0"
+								},
+								{
+									"key": "_idDetail",
+									"value": "634c821e0a31fba0b305a2d0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSpecificPrescription",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/prescriptions/:id/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"prescriptions",
+								":id",
+								""
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "634c8822f1e82535dd74e98b"
 								}
 							]
 						}
