@@ -9,15 +9,15 @@ import {
 
 const router = Router()
 
-// GET /api/common-user/
+// GET /api/common-users/
 router.get('/', getAll)
-// GET /api/common-user/:id
+// GET /api/common-users/:id
 router.get(
   '/:_id',
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   getSpecific
 )
-// POST /api/common-user/
+// POST /api/common-users/
 router.post(
   '/',
   body('firstName').notEmpty().withMessage('Los nombres no son válidos'),
@@ -28,7 +28,7 @@ router.post(
     .withMessage('La plataforma de acceso no es válida'),
   create
 )
-// POST /api/common-user/auth
+// POST /api/common-users/auth
 router.post(
   '/auth',
   body('platform')

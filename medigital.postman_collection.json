@@ -449,9 +449,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/dates",
+							"raw": "{{SERVER}}/dates",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"dates"
@@ -702,7 +702,7 @@
 								},
 								{
 									"key": "_idDetail",
-									"value": "634c821e0a31fba0b305a2d0"
+									"value": "634c8ae4d133b79506bd8036"
 								}
 							]
 						}
@@ -727,8 +727,209 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "634c8822f1e82535dd74e98b"
+									"value": "634c8ae4d133b79506bd8036"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "getAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/users",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/users/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "634e34576eee068ba65b7354"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"javier.morales\",\r\n    \"password\": \"javier123\",\r\n    \"type\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/users",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"javier.morales\",\r\n    \"password\": \"javier123\",\r\n    \"type\": \"ADMIN\",\r\n    \"status\": \"INACTIVE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/users/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "634e34576eee068ba65b7354"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/users/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "634e34576eee068ba65b7354"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "employees",
+			"item": [
+				{
+					"name": "getAllEmployees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/employees",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificEmployee",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/employees/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"employees",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "634e39edc8c0d50f6d9ce04c"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createEmployee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Javier Alexander\",\r\n    \"lastName\": \"Morales Melara\",\r\n    \"dui\": \"05904669-7\",\r\n    \"department\": \"6342c59e5b496ddd71c1c0fd\",\r\n    \"municipality\": \"6342c6e25b496ddd71c1c108\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/employees",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"employees"
 							]
 						}
 					},
@@ -761,6 +962,11 @@
 		{
 			"key": "HOST",
 			"value": "http://localhost:3001/api",
+			"type": "string"
+		},
+		{
+			"key": "SERVER",
+			"value": "http://api-medigital.herokuapp.com/api",
 			"type": "string"
 		}
 	]

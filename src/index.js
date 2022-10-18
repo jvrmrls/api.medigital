@@ -19,6 +19,8 @@ import DepartmentController from './controllers/DepartmentController.js'
 import CommonUserController from './controllers/CommonUserController.js'
 import DateController from './controllers/DateController.js'
 import PrescriptionController from './controllers/PrescriptionController.js'
+import UserController from './controllers/UserController.js'
+import EmployeeController from './controllers/EmployeeController.js'
 
 /**
  * REQUIRED CONSTANTS
@@ -46,6 +48,8 @@ app.use('/api/departments', DepartmentController)
 app.use('/api/common-users', CommonUserController)
 app.use('/api/dates', DateController)
 app.use('/api/prescriptions', PrescriptionController)
+app.use('/api/users', UserController)
+app.use('/api/employees', EmployeeController)
 
 /**
  * LISTENING APP
