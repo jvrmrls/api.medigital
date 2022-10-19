@@ -7,20 +7,23 @@ import {
   update,
   deleteSpecific
 } from '../services/DateServices.js'
+import { authenticateToken } from '../helpers/jwt.js'
 
 const router = Router()
 
 // GET /api/dates/
-router.get('/', getAll)
+router.get('/', authenticateToken, getAll)
 // GET /api/dates/:_id
 router.get(
   '/:_id',
+  authenticateToken,
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   getSpecific
 )
 // POST /api/dates/
 router.post(
   '/',
+  authenticateToken,
   body('name').notEmpty().withMessage('El nombre no es válido'),
   body('date').isDate().withMessage('La fecha no es válida'),
   body('hour')
@@ -32,6 +35,7 @@ router.post(
 // PUT /api/dates/:_id
 router.put(
   '/:_id',
+  authenticateToken,
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   body('name').notEmpty().withMessage('El nombre no es válido'),
   body('date').isDate().withMessage('La fecha no es válida'),
@@ -44,6 +48,7 @@ router.put(
 // DELETE /api/dates/:_id
 router.delete(
   '/:_id',
+  authenticateToken,
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   deleteSpecific
 )

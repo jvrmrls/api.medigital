@@ -8,20 +8,23 @@ import {
   deleteSpecific,
   auth
 } from '../services/UserServices.js'
+import { authenticateToken } from '../helpers/jwt.js'
 
 const router = Router()
 
 // GET /api/users/
-router.get('/', getAll)
+router.get('/', authenticateToken, getAll)
 // GET /api/users/:id
 router.get(
   '/:_id',
+  authenticateToken,
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   getSpecific
 )
 // POST /api/users/
 router.post(
   '/',
+  authenticateToken,
   body('username').notEmpty().withMessage('El nombre de usuario es requerido'),
   body('password').notEmpty().withMessage('La contraseña es requerida'),
   body('type')
@@ -32,6 +35,7 @@ router.post(
 // PUT /api/users/:_id
 router.put(
   '/:_id',
+  authenticateToken,
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   body('username').notEmpty().withMessage('El nombre de usuario es requerido'),
   update
@@ -39,6 +43,7 @@ router.put(
 // DELETE /api/users/:_id
 router.delete(
   '/:_id',
+  authenticateToken,
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   deleteSpecific
 )

@@ -22,5 +22,17 @@ const createToken = (data) => {
 const decodeToken = (token) => {
   return jwt.verify(token, _SECRET)
 }
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')[1]
 
-export { createToken, decodeToken }
+  if (token == null) return res.sendStatus(401)
+
+  jwt.verify(token, _SECRET, (err, user) => {
+    if (err) return res.sendStatus(403)
+    req.user = user
+    next()
+  })
+}
+
+export { createToken, decodeToken, authenticateToken }

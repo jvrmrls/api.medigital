@@ -44,7 +44,7 @@ export async function create(req, res) {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res.status(422).json({ errors: errors.array() })
     }
     const {
       firstName,
@@ -91,7 +91,7 @@ export async function update(req, res) {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
     const {
@@ -145,7 +145,7 @@ export async function deleteSpecific(req, res) {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
     /* A query to the database. */
@@ -162,7 +162,7 @@ export async function addResponsible(req, res) {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
     const { firstName, lastName, phoneNumber, kinship } = req.body
@@ -190,7 +190,7 @@ export async function deleteResponsible(req, res) {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res.status(422).json({ errors: errors.array() })
     }
     const { _id, responsible } = req.params
     const { responsibles } = await PatientModel.findById(_id)

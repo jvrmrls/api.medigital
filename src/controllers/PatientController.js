@@ -9,16 +9,18 @@ import {
   addResponsible,
   deleteResponsible
 } from '../services/PatientServices.js'
+import { authenticateToken } from '../helpers/jwt.js'
 
 const router = Router()
 
 // GET /api/patients/
-router.get('/', getAll)
+router.get('/', authenticateToken, getAll)
 // GET /api/patients/:id
-router.get('/:_id', getSpecific)
+router.get('/:_id', authenticateToken, getSpecific)
 // POST /api/patients/
 router.post(
   '/',
+  authenticateToken,
   body('firstName').notEmpty().withMessage('Los nombres no son válidos'),
   body('lastName').notEmpty().withMessage('Los apellidos no son válidos'),
   body('phoneNumber')
@@ -33,6 +35,7 @@ router.post(
 // PUT /api/patients/
 router.put(
   '/:_id',
+  authenticateToken,
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   body('firstName').notEmpty().withMessage('Los nombres no son válidos'),
   body('lastName').notEmpty().withMessage('Los apellidos no son válidos'),
@@ -48,6 +51,7 @@ router.put(
 // DELETE /api/patients/:id
 router.delete(
   '/:_id',
+  authenticateToken,
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   deleteSpecific
 )
@@ -55,6 +59,7 @@ router.delete(
 // POST /api/patients/responsibles
 router.post(
   '/:_id/responsibles',
+  authenticateToken,
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   body('firstName').notEmpty().withMessage('Los nombres no son válidos'),
   body('lastName').notEmpty().withMessage('Los apellidos no son válidos'),
@@ -68,6 +73,7 @@ router.post(
 // DELETE /api/patients/responsibles/:id/:responsible
 router.delete(
   '/:_id/responsibles/:responsible',
+  authenticateToken,
   param('_id')
     .isMongoId()
     .withMessage('El ID de paciente no es del formato correcto'),

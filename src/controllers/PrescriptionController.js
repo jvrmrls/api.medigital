@@ -8,18 +8,20 @@ import {
   deleteDetail,
   getSpecific
 } from '../services/PrescriptionServices.js'
+import { authenticateToken } from '../helpers/jwt.js'
 
 const router = Router()
 
 // GET /api/prescriptions/
-router.get('/', getAll)
+router.get('/', authenticateToken, getAll)
 
 // GET /api/prescriptions/:_id
-router.get('/:_id', getSpecific)
+router.get('/:_id', authenticateToken, getSpecific)
 
 // POST /api/prescriptions/
 router.post(
   '/',
+  authenticateToken,
   body('consult')
     .isMongoId()
     .withMessage('El ID de consulta no es del formato correcto'),
@@ -29,6 +31,7 @@ router.post(
 // DELETE /api/prescriptions/:id
 router.delete(
   '/:_id',
+  authenticateToken,
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   deleteSpecific
 )
@@ -36,6 +39,7 @@ router.delete(
 // POST /api/prescriptions/:_id/detail
 router.post(
   '/:_id/detail',
+  authenticateToken,
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   body('medicine')
     .isMongoId()
@@ -47,6 +51,7 @@ router.post(
 // DELETE /api/prescriptions/:_id/detail
 router.delete(
   '/:_id/detail/:_idDetail',
+  authenticateToken,
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   param('_idDetail')
     .isMongoId()

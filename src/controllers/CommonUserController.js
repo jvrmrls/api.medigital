@@ -6,20 +6,23 @@ import {
   create,
   auth
 } from '../services/CommonUserServices.js'
+import { authenticateToken } from '../helpers/jwt.js'
 
 const router = Router()
 
 // GET /api/common-users/
-router.get('/', getAll)
+router.get('/', authenticateToken, getAll)
 // GET /api/common-users/:id
 router.get(
   '/:_id',
+  authenticateToken,
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   getSpecific
 )
 // POST /api/common-users/
 router.post(
   '/',
+  authenticateToken,
   body('firstName').notEmpty().withMessage('Los nombres no son válidos'),
   body('lastName').notEmpty().withMessage('Los apellidos no son válidos'),
   body('email').isEmail().withMessage('El correo no es válido'),

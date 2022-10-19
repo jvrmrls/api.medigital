@@ -22,7 +22,7 @@ export async function getSpecific(req, res) {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
     const _data = await DateModel.findOne({ _id }).populate('booked_by', {
@@ -43,7 +43,7 @@ export async function create(req, res) {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res.status(422).json({ errors: errors.array() })
     }
     const { name, reason, date, hour, observations, bookedBy, status } =
       req.body
@@ -68,7 +68,7 @@ export async function update(req, res) {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
     const { name, reason, date, hour, observations, status } = req.body
@@ -99,7 +99,7 @@ export async function deleteSpecific(req, res) {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
     const _date = await DateModel.findByIdAndRemove(_id)
