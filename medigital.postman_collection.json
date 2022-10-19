@@ -813,7 +813,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"javier.morales\",\r\n    \"password\": \"javier123\",\r\n    \"type\": \"ADMIN\",\r\n    \"status\": \"INACTIVE\"\r\n}",
+							"raw": "{\r\n    \"username\": \"javier.morales\",\r\n    \"password\": \"javier123\",\r\n    \"type\": \"ADMIN\",\r\n    \"status\": \"ACTIVE\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -858,6 +858,33 @@
 									"key": "_id",
 									"value": "634e34576eee068ba65b7354"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"javier.morales\",\r\n    \"password\" : \"javier123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/users/auth",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								"auth"
 							]
 						}
 					},
@@ -934,10 +961,77 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "updateEmployee",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Javier Alexander\",\r\n    \"lastName\": \"Morales Melara\",\r\n    \"dui\": \"05904669-7\",\r\n    \"department\": \"6342c59e5b496ddd71c1c0fd\",\r\n    \"municipality\": \"6342c6e25b496ddd71c1c108\",\r\n    \"email\": \"javiermoralesmelara@gmail.com\",\r\n    \"phoneNumber\": [\"(503)7270-9725\", \"(503)6020-8812\"],\r\n    \"user\": \"634e34576eee068ba65b7354\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/employees/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"employees",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "634e39edc8c0d50f6d9ce04c"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteEmployee",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/employees/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"employees",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
