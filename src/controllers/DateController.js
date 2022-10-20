@@ -11,7 +11,7 @@ import { authenticateToken } from '../helpers/jwt.js'
 
 const router = Router()
 
-// GET /api/dates/ || /api/dates?by=
+// GET /api/dates/ || /api/dates?booked_by=
 router.get('/', authenticateToken, getAll)
 // GET /api/dates/:_id
 router.get(

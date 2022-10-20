@@ -461,12 +461,12 @@
 					"response": []
 				},
 				{
-					"name": "getAllUserDates",
+					"name": "getAllFilterDates",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/dates?filter=internalUserToken",
+							"raw": "{{HOST}}/dates?booked_by=true&date=2022-10-15",
 							"host": [
 								"{{HOST}}"
 							],
@@ -475,8 +475,12 @@
 							],
 							"query": [
 								{
-									"key": "filter",
-									"value": "internalUserToken"
+									"key": "booked_by",
+									"value": "true"
+								},
+								{
+									"key": "date",
+									"value": "2022-10-15"
 								}
 							]
 						}

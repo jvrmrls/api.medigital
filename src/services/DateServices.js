@@ -6,14 +6,9 @@ import DateModel from '../models/DateModel.js'
 export async function getAll(req, res) {
   try {
     let query = {}
-    const filter = req.query.filter
-    switch (filter) {
-      case 'internalUserToken': {
-        query = {
-          booked_by: req.user._id
-        }
-      }
-    }
+    const { booked_by, date } = req.query
+    if (booked_by) query = { ...query, booked_by: req.user._id }
+    if (date) query = { ...query, date }
     const _data = await DateModel.find(query).populate('booked_by', {
       _id: 0,
       password: 0,
