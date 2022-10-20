@@ -27,7 +27,7 @@ const dateSchema = Schema(
     booked_by: {
       type: Schema.Types.ObjectId,
       ref: 'CommonUser',
-      required: true
+      default: null
     },
     status: {
       type: String,
@@ -37,6 +37,13 @@ const dateSchema = Schema(
   },
   { timestamps: true, versionKey: false }
 )
+
+dateSchema.methods.toJSON = function () {
+  var obj = this.toObject()
+  delete obj.createdAt
+  delete obj.updatedAt
+  return obj
+}
 /* Creating a model called DateModel. */
 const DateModel = mongoose.model('Date', dateSchema)
 export default DateModel

@@ -5,10 +5,21 @@ import DateModel from '../models/DateModel.js'
 
 export async function getAll(req, res) {
   try {
-    const _data = await DateModel.find({}).populate('booked_by', {
+    let query = {}
+    const filter = req.query.filter
+    switch (filter) {
+      case 'internalUserToken': {
+        query = {
+          booked_by: req.user._id
+        }
+      }
+    }
+    const _data = await DateModel.find(query).populate('booked_by', {
       _id: 0,
       password: 0,
-      platform: 0
+      platform: 0,
+      createdAt: 0,
+      updatedAt: 0
     })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
@@ -45,15 +56,14 @@ export async function create(req, res) {
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() })
     }
-    const { name, reason, date, hour, observations, bookedBy, status } =
-      req.body
+    const { name, reason, date, hour, observations, status } = req.body
     const _date = DateModel({
       name,
       reason,
       date,
       hour,
       observations,
-      booked_by: bookedBy,
+      booked_by: req.user._id,
       status
     })
     await _date.save()

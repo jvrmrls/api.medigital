@@ -461,6 +461,29 @@
 					"response": []
 				},
 				{
+					"name": "getAllUserDates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/dates?filter=internalUserToken",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"dates"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "internalUserToken"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "getSpecificDate",
 					"request": {
 						"method": "GET",
@@ -491,7 +514,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Oscar Alexis Chavez Torres\",\r\n    \"date\": \"2022-10-12\",\r\n    \"hour\": \"11:01\",\r\n    \"reason\": \"Dolor de estomago\",\r\n    \"bookedBy\": \"6342f98588d2f87828edc3cf\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Javier Alexander Morales Melara\",\r\n    \"date\": \"2022-10-15\",\r\n    \"hour\": \"12:01\",\r\n    \"reason\": \"Dolor de cabeza\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -517,7 +540,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Oscar Alexis Chavez Torres\",\r\n    \"date\": \"2022-10-12\",\r\n    \"hour\": \"11:01\",\r\n    \"reason\": \"Dolor de estomago\",\r\n    \"status\": null\r\n}",
+							"raw": "{\r\n    \"_id\": \"6350b3c9fa1b86f24c31323d\",\r\n    \"name\": \"Javier Alexander Morales Melara\",\r\n    \"date\": \"2022-10-15\",\r\n    \"hour\": \"12:00\",\r\n    \"reason\": \"Dolor de cabeza\",\r\n    \"observations\": \"El usuario realizo la cita por la plataforma\",\r\n    \"status\": \"PENDING\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -536,7 +559,7 @@
 							"variable": [
 								{
 									"key": "_id",
-									"value": "63434a6e57e0888e676b85ac"
+									"value": "6350b3c9fa1b86f24c31323d"
 								}
 							]
 						}
@@ -560,7 +583,7 @@
 							"variable": [
 								{
 									"key": "_id",
-									"value": "63434ee8bbdd9e840a6a24c8"
+									"value": "6350b5dd360a35e654f21dbd"
 								}
 							]
 						}
@@ -1027,7 +1050,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzRhMTZmNDE4ZmJjZTVkNjlmOWM4NWMiLCJmaXJzdF9uYW1lIjoiSmF2aWVyIEFsZXhhbmRlciIsImxhc3RfbmFtZSI6Ik1vcmFsZXMgTWVsYXJhIiwiZW1haWwiOiJqYXZpZXJtb3JhbGVzbWVsYXJhQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiIiwiYXZhdGFyIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MlB6Q0ZaXzFod29EZFBiaDFHdU91dmFZSHFMVWstLXh2T2hZN2NrZz1zOTYtYyIsInBsYXRmb3JtIjoiR09PR0xFIiwiY3JlYXRlZEF0IjoiMjAyMi0xMC0xNVQwMjoxMjowNC4wNjNaIiwidXBkYXRlZEF0IjoiMjAyMi0xMC0xNVQwMjoxMjowNC4wNjNaIiwiaWF0IjoxNjY2MjMyMzEwLCJleHAiOjE2NjY4MzcxMTB9.jaQxrRYzvT1aI_Ui_HlQysI6RJP4dIIs0EReQxHmIpc",
 				"type": "string"
 			}
 		]

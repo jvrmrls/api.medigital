@@ -25,6 +25,12 @@ const userSchema = Schema(
   },
   { timestamps: true, versionKey: false }
 )
+userSchema.methods.toJSON = function () {
+  var obj = this.toObject()
+  delete obj.createdAt
+  delete obj.updatedAt
+  return obj
+}
 /* Creating a model called UserModel. */
 const UserModel = mongoose.model('User', userSchema)
 export default UserModel
