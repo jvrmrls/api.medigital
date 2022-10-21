@@ -10,7 +10,7 @@ const consultSchema = Schema(
     },
     start_hour: {
       type: String,
-      required: true
+      default: ''
     },
     end_hour: {
       type: String,
@@ -24,7 +24,7 @@ const consultSchema = Schema(
     doctor: {
       type: Schema.Types.ObjectId,
       ref: 'Doctor',
-      required: true
+      default: null
     },
     reason: {
       type: String,
@@ -42,10 +42,6 @@ const consultSchema = Schema(
       type: Array,
       default: []
     },
-    other_diagnostic: {
-      type: String,
-      default: ''
-    },
     prescriptions: {
       type: Array,
       default: []
@@ -53,6 +49,16 @@ const consultSchema = Schema(
     observations: {
       type: String,
       default: ''
+    },
+    prev_date: {
+      type: Schema.Types.ObjectId,
+      ref: 'Date',
+      default: null
+    },
+    status: {
+      type: String,
+      enum: ['WAITING', 'IN PROGRESS', 'FINISHED', 'CANCELED'],
+      default: 'WAITING'
     }
   },
   { timestamps: true, versionKey: false }

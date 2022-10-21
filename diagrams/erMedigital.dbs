@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="MedigitalMongoDb" id="Project-14d5" database="MongoDb" >
 	<schema name="medigital" >
+		<table name="commonusers" >
+			<column name="_id" type="objectId" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="first_name" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="last_name" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="email" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="password" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="avatar" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="platform" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="createdAt" type="date" length="800" decimal="0" jt="91" mandatory="y" />
+			<column name="updatedAt" type="date" length="800" decimal="0" jt="91" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="consults" >
+			<column name="_id" type="objectId" length="800" decimal="0" jt="-8" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="dates" >
+			<column name="_id" type="objectId" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="name" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="date" type="date" length="800" decimal="0" jt="91" mandatory="y" />
+			<column name="hour" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="reason" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="observations" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="booked_by" type="objectId" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="status" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="createdAt" type="date" length="800" decimal="0" jt="91" mandatory="y" />
+			<column name="updatedAt" type="date" length="800" decimal="0" jt="91" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<fk name="Relationship_0" virtual="y" to_schema="medigital" to_table="commonusers" >
+				<fk_column name="booked_by" pk="_id" />
+			</fk>
+		</table>
 		<table name="departments" >
 			<column name="_id" type="objectId" length="800" decimal="0" jt="-8" mandatory="y" />
 			<column name="code" type="string" length="800" decimal="0" jt="12" mandatory="y" />
@@ -9,6 +47,36 @@
 			<index name="_id_" unique="PRIMARY_KEY" >
 				<column name="_id" />
 			</index>
+		</table>
+		<table name="employees" >
+			<column name="_id" type="objectId" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="first_name" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="last_name" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="dui" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="isss" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="afp" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="birthday" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="phone_number" type="array[string]" length="800" decimal="0" jt="2003" mandatory="y" />
+			<column name="email" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="address" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="department" type="objectId" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="municipality" type="objectId" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="user" type="objectId" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="is_active" type="Boolean" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="createdAt" type="date" length="800" decimal="0" jt="91" mandatory="y" />
+			<column name="updatedAt" type="date" length="800" decimal="0" jt="91" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<fk name="Relationship_1" virtual="y" to_schema="medigital" to_table="departments" >
+				<fk_column name="department" pk="_id" />
+			</fk>
+			<fk name="Relationship_2" virtual="y" to_schema="medigital" to_table="municipalities" >
+				<fk_column name="municipality" pk="_id" />
+			</fk>
+			<fk name="Relationship_3" virtual="y" to_schema="medigital" to_table="users" >
+				<fk_column name="user" pk="_id" />
+			</fk>
 		</table>
 		<table name="municipalities" >
 			<column name="_id" type="objectId" length="800" decimal="0" jt="-8" mandatory="y" />
@@ -50,12 +118,36 @@
 				<fk_column name="municipality" pk="_id" />
 			</fk>
 		</table>
+		<table name="prescriptions" >
+			<column name="_id" type="objectId" length="800" decimal="0" jt="-8" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="users" >
+			<column name="_id" type="objectId" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="username" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="password" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="type" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="status" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="createdAt" type="date" length="800" decimal="0" jt="91" mandatory="y" />
+			<column name="updatedAt" type="date" length="800" decimal="0" jt="91" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
 	</schema>
 	<connector name="MedigitalMongoDb" database="MongoDb" driver_class="com.wisecoders.dbschema.mongodb.JdbcDriver" driver_jar="mongojdbc4.8.jar" url="mongodb+srv://jalex:XAVI_morals.1@mome.mfdxgdx.mongodb.net/?retryWrites=true&amp;w=majority" host="localhost" port="27017" user="jalex" passwd="WEFWSV9tb3JhbHMuMQ==" useSystemProxy="false" />
 	<layout name="Main Layout" id="Layout-126f" show_column_type="y" show_relation="name" >
-		<entity schema="medigital" name="departments" color="BED3F4" x="416" y="96" />
-		<entity schema="medigital" name="municipalities" color="C7F4BE" x="416" y="384" />
-		<entity schema="medigital" name="patients" color="F4DDBE" x="48" y="80" />
+		<entity schema="medigital" name="commonusers" color="3986C1" x="64" y="80" />
+		<entity schema="medigital" name="consults" color="3986C1" x="320" y="272" />
+		<entity schema="medigital" name="dates" color="3986C1" x="640" y="272" />
+		<entity schema="medigital" name="departments" color="BED3F4" x="416" y="368" />
+		<entity schema="medigital" name="employees" color="3986C1" x="960" y="272" />
+		<entity schema="medigital" name="municipalities" color="C7F4BE" x="416" y="656" />
+		<entity schema="medigital" name="patients" color="F4DDBE" x="48" y="352" />
+		<entity schema="medigital" name="prescriptions" color="3986C1" x="512" y="544" />
+		<entity schema="medigital" name="users" color="3986C1" x="832" y="544" />
 		<group name="Collection &#039;departments&#039;" color="ECF0F7" >
 			<entity schema="medigital" name="departments" />
 		</group>
@@ -134,21 +226,21 @@ db.getCollection('patients').find()]]></string>
 				<cell type="chart" name="Pie" template="Pie" pos="0,1,4,1,l,c" max_records="20" >
 					<form_script type="DataSource" language="SQL" >
 						<var name="_id" type="-8" />
-						<var name="first_name" />
-						<var name="last_name" />
+						<var name="first_name" type="-1" />
+						<var name="last_name" type="-1" />
 						<var name="phone_number" type="2003" />
 						<var name="birthday" type="91" />
-						<var name="gender" />
-						<var name="dui" />
-						<var name="address" />
+						<var name="gender" type="-1" />
+						<var name="dui" type="-1" />
+						<var name="address" type="-1" />
 						<var name="department" type="-8" />
 						<var name="municipality" type="-8" />
-						<var name="marital_status" />
-						<var name="blood_type" />
-						<var name="family_history" />
-						<var name="personal_history" />
+						<var name="marital_status" type="-1" />
+						<var name="blood_type" type="-1" />
+						<var name="family_history" type="-1" />
+						<var name="personal_history" type="-1" />
 						<var name="responsibles" type="2003" />
-						<var name="status" />
+						<var name="status" type="-1" />
 						<var name="createdAt" type="91" />
 						<var name="updatedAt" type="91" />
 						<var name="__v" type="4" />
@@ -163,21 +255,21 @@ db.getCollection('patients').find()]]></string>
 				<tableview name="sample" template="Table" css="table table-striped table-sm table-hover" pos="0,2,4,2,f,f" layout="{{-2,-2,-2,-2,-2,-2,-2},{-2,-2}}" scroll="n" html="n" header_rows="1" >
 					<form_script type="DataSource" language="SQL" >
 						<var name="_id" type="-8" />
-						<var name="first_name" />
-						<var name="last_name" />
+						<var name="first_name" type="-1" />
+						<var name="last_name" type="-1" />
 						<var name="phone_number" type="2003" />
 						<var name="birthday" type="91" />
-						<var name="gender" />
-						<var name="dui" />
-						<var name="address" />
+						<var name="gender" type="-1" />
+						<var name="dui" type="-1" />
+						<var name="address" type="-1" />
 						<var name="department" type="-8" />
 						<var name="municipality" type="-8" />
-						<var name="marital_status" />
-						<var name="blood_type" />
-						<var name="family_history" />
-						<var name="personal_history" />
+						<var name="marital_status" type="-1" />
+						<var name="blood_type" type="-1" />
+						<var name="family_history" type="-1" />
+						<var name="personal_history" type="-1" />
 						<var name="responsibles" type="2003" />
-						<var name="status" />
+						<var name="status" type="-1" />
 						<var name="createdAt" type="91" />
 						<var name="updatedAt" type="91" />
 						<var name="__v" type="4" />

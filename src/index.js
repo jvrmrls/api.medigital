@@ -21,6 +21,7 @@ import DateController from './controllers/DateController.js'
 import PrescriptionController from './controllers/PrescriptionController.js'
 import UserController from './controllers/UserController.js'
 import EmployeeController from './controllers/EmployeeController.js'
+import ConsultController from './controllers/ConsultController.js'
 
 /**
  * REQUIRED CONSTANTS
@@ -50,6 +51,7 @@ app.use('/api/dates', DateController)
 app.use('/api/prescriptions', PrescriptionController)
 app.use('/api/users', UserController)
 app.use('/api/employees', EmployeeController)
+app.use('/api/consults', ConsultController)
 
 /**
  * LISTENING APP
