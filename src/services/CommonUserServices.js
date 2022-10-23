@@ -1,5 +1,6 @@
 import { validationResult } from 'express-validator'
 import { OAuth2Client } from 'google-auth-library'
+import axios from 'axios'
 // Import model
 import CommonUserModel from '../models/CommonUserModel.js'
 
@@ -89,7 +90,13 @@ export async function auth(req, res) {
         avatar = payload.picture
         break
       case 'FACEBOOK':
-        console.log('logged by facebook')
+        const { data } = await verifyLoginWithFacebook(tokenId)
+        // update values
+        isVerified = true
+        email = data.email
+        firstName = data.first_name
+        lastName = data.last_name
+        avatar = data?.picture?.data?.url || null
         break
       case 'NATIVE':
         isVerified = true
@@ -135,6 +142,7 @@ export async function auth(req, res) {
       email: _commonUser.email
     })
   } catch (err) {
+    console.log(err)
     /* Returning the response to the client. */
     return res.status(500).json(err)
   }
@@ -186,6 +194,19 @@ const verifyLoginWithGoogle = async (tokenId) => {
       })
       .then((data) => {
         resolve(data)
+      })
+      .catch((err) => reject(err))
+  })
+}
+
+const verifyLoginWithFacebook = async (tokenId) => {
+  return new Promise((resolve, reject) => {
+    axios({
+      url: `https://graph.facebook.com/me?fields=id,name,first_name,last_name,email,birthday,picture&access_token=${tokenId}`,
+      method: 'get'
+    })
+      .then(({ data }) => {
+        resolve({ data })
       })
       .catch((err) => reject(err))
   })
