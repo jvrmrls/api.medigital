@@ -66,6 +66,8 @@ export async function auth(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     let { email, password, platform, tokenId } = req.body
+    // DECLARE VARIABLE COMMON USER
+    let _commonUser = null
     // DECLARE VARIABLE IS VERIFIED
     let isVerified = false
     // DECLARE VARIABLES TO HELP REGISTER NEW USER
@@ -99,7 +101,15 @@ export async function auth(req, res) {
         avatar = data?.picture?.data?.url || null
         break
       case 'NATIVE':
+        _commonUser = await CommonUserModel.findOne({ email })
+        if (!_commonUser)
+          return res.status(400).json({ msg: 'Usuario no existe' })
+
         isVerified = true
+        email = _commonUser.email
+        firstName = _commonUser.first_name
+        lastName = _commonUser.last_name
+        avatar = _commonUser.avatar
         break
       default:
         return res
@@ -110,15 +120,17 @@ export async function auth(req, res) {
     if (!isVerified) {
       return res.status(400).json({ msg: 'No se validó el inicio de sesión' })
     }
-    // FIND USER ON DATABASE
-    const _commonUser = await findOrCreateUserOnDatabase({
-      firstName,
-      lastName,
-      email,
-      password,
-      avatar,
-      platform
-    })
+    // FIND USER ON DATABASE IF PLATFORM IS DIFFERENT NATIVE
+    if (platform != 'NATIVE') {
+      _commonUser = await findOrCreateUserOnDatabase({
+        firstName,
+        lastName,
+        email,
+        password,
+        avatar,
+        platform
+      })
+    }
 
     // IF THE COMMON USER HAS ALREADY AN ACCOUNT WITH OTHER PLATFORM
     if (_commonUser.platform !== platform) {
@@ -126,13 +138,11 @@ export async function auth(req, res) {
         .status(400)
         .json({ msg: 'Usuario ya registrado con otra plataforma' })
     }
-    // IF THE COMMON USER PLATFORM IS NATIVE, VALIDATE PASSWORD
-    if (platform === 'NATIVE') {
-      // COMPARE PASSWORDS
-      if (_commonUser.password !== password) {
-        return res.status(400).json({ msg: 'Credenciales incorrectas' })
-      }
+    // IF COMMON USER IS NATIVE, VERIFY PASSWORD
+    if (platform === 'NATIVE' && _commonUser.password !== password) {
+      return res.status(400).json({ msg: 'Credenciales incorrectas' })
     }
+
     // CREATE THE TOKEN
     const _token = createToken(_commonUser)
     return res.status(200).json({
@@ -142,7 +152,6 @@ export async function auth(req, res) {
       email: _commonUser.email
     })
   } catch (err) {
-    console.log(err)
     /* Returning the response to the client. */
     return res.status(500).json(err)
   }
