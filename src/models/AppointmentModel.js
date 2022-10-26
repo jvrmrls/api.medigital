@@ -45,5 +45,5 @@ appointmentSchema.methods.toJSON = function () {
   return obj
 }
 /* Creating a model called AppointmentModel. */
-const AppointmentModel = mongoose.model('Date', appointmentSchema)
+const AppointmentModel = mongoose.model('Appointment', appointmentSchema)
 export default AppointmentModel
