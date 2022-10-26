@@ -17,7 +17,7 @@ import PatientController from './controllers/PatientController.js'
 import MunicipalityController from './controllers/MunicipalityController.js'
 import DepartmentController from './controllers/DepartmentController.js'
 import CommonUserController from './controllers/CommonUserController.js'
-import DateController from './controllers/DateController.js'
+import AppointmentController from './controllers/AppointmentController.js'
 import PrescriptionController from './controllers/PrescriptionController.js'
 import UserController from './controllers/UserController.js'
 import EmployeeController from './controllers/EmployeeController.js'
@@ -47,7 +47,7 @@ app.use('/api/patients', PatientController)
 app.use('/api/municipalities', MunicipalityController)
 app.use('/api/departments', DepartmentController)
 app.use('/api/common-users', CommonUserController)
-app.use('/api/dates', DateController)
+app.use('/api/appointments', AppointmentController)
 app.use('/api/prescriptions', PrescriptionController)
 app.use('/api/users', UserController)
 app.use('/api/employees', EmployeeController)

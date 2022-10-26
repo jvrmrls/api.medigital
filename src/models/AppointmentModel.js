@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const { Schema } = mongoose
 
-const dateSchema = Schema(
+const appointmentSchema = Schema(
   {
     name: {
       type: String,
@@ -38,12 +38,12 @@ const dateSchema = Schema(
   { timestamps: true, versionKey: false }
 )
 
-dateSchema.methods.toJSON = function () {
+appointmentSchema.methods.toJSON = function () {
   var obj = this.toObject()
   delete obj.createdAt
   delete obj.updatedAt
   return obj
 }
-/* Creating a model called DateModel. */
-const DateModel = mongoose.model('Date', dateSchema)
-export default DateModel
+/* Creating a model called AppointmentModel. */
+const AppointmentModel = mongoose.model('Date', appointmentSchema)
+export default AppointmentModel

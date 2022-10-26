@@ -1,7 +1,7 @@
 import { validationResult } from 'express-validator'
 import _ from 'lodash'
 // Import model
-import DateModel from '../models/DateModel.js'
+import AppointmentModel from '../models/AppointmentModel.js'
 
 export async function getAll(req, res) {
   try {
@@ -9,7 +9,7 @@ export async function getAll(req, res) {
     const { booked_by, date } = req.query
     if (booked_by) query = { ...query, booked_by: req.user._id }
     if (date) query = { ...query, date }
-    const _data = await DateModel.find(query).populate('booked_by', {
+    const _data = await AppointmentModel.find(query).populate('booked_by', {
       _id: 0,
       password: 0,
       platform: 0,
@@ -31,11 +31,14 @@ export async function getSpecific(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
-    const _data = await DateModel.findOne({ _id }).populate('booked_by', {
-      _id: 0,
-      password: 0,
-      platform: 0
-    })
+    const _data = await AppointmentModel.findOne({ _id }).populate(
+      'booked_by',
+      {
+        _id: 0,
+        password: 0,
+        platform: 0
+      }
+    )
     if (!_data) return res.status(400).json({ msg: 'No se encontró la cita' })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
@@ -52,7 +55,7 @@ export async function create(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     const { name, reason, date, hour, observations, status } = req.body
-    const _date = DateModel({
+    const _appointment = AppointmentModel({
       name,
       reason,
       date,
@@ -61,8 +64,8 @@ export async function create(req, res) {
       booked_by: req.user._id,
       status
     })
-    await _date.save()
-    return res.status(201).json(_date)
+    await _appointment.save()
+    return res.status(201).json(_appointment)
   } catch (err) {
     /* Returning the response to the client. */
     return res.status(500).json(err)
@@ -77,7 +80,7 @@ export async function update(req, res) {
     }
     const { _id } = req.params
     const { name, reason, date, hour, observations, status } = req.body
-    const _date = {
+    const _appointment = {
       name,
       reason,
       date,
@@ -85,9 +88,9 @@ export async function update(req, res) {
       observations,
       status
     }
-    const _data = await DateModel.findByIdAndUpdate(
+    const _data = await AppointmentModel.findByIdAndUpdate(
       _id,
-      _.omitBy(_date, _.isNull),
+      _.omitBy(_appointment, _.isNull),
       {
         new: true
       }
@@ -107,9 +110,9 @@ export async function deleteSpecific(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
-    const _date = await DateModel.findByIdAndRemove(_id)
+    const _appointment = await AppointmentModel.findByIdAndRemove(_id)
     /* Returning the response to the client. */
-    return res.status(200).json(_date)
+    return res.status(200).json(_appointment)
   } catch (err) {
     /* Returning the response to the client. */
     return res.status(500).json(err)

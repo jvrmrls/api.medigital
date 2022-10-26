@@ -350,9 +350,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/common-users",
+							"raw": "{{SERVER}}/common-users",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"common-users"
@@ -418,7 +418,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"platform\": \"GOOGLE\",\r\n    \"tokenId\":\"eyJhbGciOiJSUzI1NiIsImtpZCI6ImVkMzZjMjU3YzQ3ZWJhYmI0N2I0NTY4MjhhODU4YWE1ZmNkYTEyZGQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI3MzgxNTY1MjY1MjEtaXQyZTVyb2U5NGtkcTRtaW50NTRwNjA0bzE5aDNpcDYuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI3MzgxNTY1MjY1MjEtMmRpMmlsOXU2dDJnNWo1MWVmMTNvNW9rZ2UzbmQwNGUuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDQyNTA2NTMxMjgxNjkwNjIzNTMiLCJlbWFpbCI6Imphdmllcm1vcmFsZXNtZWxhcmFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJKYXZpZXIgQWxleGFuZGVyIE1vcmFsZXMgTWVsYXJhIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FMbTV3dTJQekNGWl8xaHdvRGRQYmgxR3VPdXZhWUhxTFVrLS14dk9oWTdja2c9czk2LWMiLCJnaXZlbl9uYW1lIjoiSmF2aWVyIEFsZXhhbmRlciIsImZhbWlseV9uYW1lIjoiTW9yYWxlcyBNZWxhcmEiLCJsb2NhbGUiOiJlcy00MTkiLCJpYXQiOjE2NjUzMzM2NDksImV4cCI6MTY2NTMzNzI0OX0.A9B1zQX0Nv0Im_PTA6gn2xbUp_qGyfAV7MJUtJyFXe8QB11oIAV6ODIueOz9IPcU3YDg4eqOx09xHGVaaC48K19YXjSzUlA6ulz0xFUn6xTN_6SNdZmHjaPHdiRDit-wlivKOCIxes-LJP8BorqhYIc-DzYAt69jvod3Hc6vRpOXc-GB9vItJvTlPkWyK1DgBIiHF3HvZGRRE2_5rtIRltj3dRRxDjkA0zbRt_uFVIFmTv6nSBAwLKDwhi0t8YsH2AVO6eMUi6Qepv_9RPNItWV70NZMDPAe6k6iRFHiwkhY-XWvjAiK2RwKMyzJa-4BVRGkQfsIJbKYatk9ycr_MA\"\r\n}",
+							"raw": "{\r\n    \"platform\": \"FACEBOOK\",\r\n    \"tokenId\":\"EAAK8KCHuecsBAK75vJuZA1HBozZCwafhg06ZC5ZB6hWZB7yDIEhyIqNA23AYDmr2ZAEhrvUYmJ3VfkiuGclkrcjZCDiybTCoo6EmcjrbVXY0645U2jThP2Iq7NXmyrGvIPB0Oh2y8IUbqtG0WZByfItBoQ2HLZAR290qQZCfJwdCWU7q7LSr5oNXAXBCPZBMTtIsKhfn3JPXvBELvOGv8HPVadt\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -441,37 +441,37 @@
 			]
 		},
 		{
-			"name": "dates",
+			"name": "appointments",
 			"item": [
 				{
-					"name": "getAllDates",
+					"name": "getAllAppointments",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{SERVER}}/dates",
+							"raw": "{{HOST}}/appointments",
 							"host": [
-								"{{SERVER}}"
+								"{{HOST}}"
 							],
 							"path": [
-								"dates"
+								"appointments"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "getAllFilterDates",
+					"name": "getAllFilterAppointments",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/dates?booked_by=true&date=2022-10-15",
+							"raw": "{{SERVER}}/appointments?booked_by=true&date=2022-10-15",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
-								"dates"
+								"appointments"
 							],
 							"query": [
 								{
@@ -488,17 +488,17 @@
 					"response": []
 				},
 				{
-					"name": "getSpecificDate",
+					"name": "getSpecificAppointment",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/dates/:_id",
+							"raw": "{{HOST}}/appointments/:_id",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
-								"dates",
+								"appointments",
 								":_id"
 							],
 							"variable": [
@@ -512,13 +512,13 @@
 					"response": []
 				},
 				{
-					"name": "createDate",
+					"name": "createAppointment",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Javier Alexander Morales Melara\",\r\n    \"date\": \"2022-10-15\",\r\n    \"hour\": \"12:01\",\r\n    \"reason\": \"Dolor de cabeza\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Javier Alexander Morales Melara\",\r\n    \"date\": \"2022-10-12\",\r\n    \"hour\": \"12:00\",\r\n    \"reason\": \"Dolor de cabeza\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -526,25 +526,25 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/dates",
+							"raw": "{{SERVER}}/appointments",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
-								"dates"
+								"appointments"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "updateDate",
+					"name": "updateAppointment",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"_id\": \"6350b3c9fa1b86f24c31323d\",\r\n    \"name\": \"Javier Alexander Morales Melara\",\r\n    \"date\": \"2022-10-15\",\r\n    \"hour\": \"12:00\",\r\n    \"reason\": \"Dolor de cabeza\",\r\n    \"observations\": \"El usuario realizo la cita por la plataforma\",\r\n    \"status\": \"PENDING\"\r\n}",
+							"raw": "{\r\n    \"_id\": \"6350b3c9fa1b86f24c31323d\",\r\n    \"name\": \"Javier Alexander Morales Melara\",\r\n    \"date\": \"2022-10-12\",\r\n    \"hour\": \"8:00\",\r\n    \"reason\": \"Dolor de la planta baja del pie\",\r\n    \"observations\": \"El usuario realizo la cita por la plataforma\",\r\n    \"status\": \"PENDING\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -552,12 +552,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/dates/:_id",
+							"raw": "{{SERVER}}/appointments/:_id",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
-								"dates",
+								"appointments",
 								":_id"
 							],
 							"variable": [
@@ -571,17 +571,17 @@
 					"response": []
 				},
 				{
-					"name": "deleteSpecificDate",
+					"name": "deleteSpecificAppointment",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/dates/:_id",
+							"raw": "{{HOST}}/appointments/:_id",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
-								"dates",
+								"appointments",
 								":_id"
 							],
 							"variable": [
@@ -598,7 +598,132 @@
 		},
 		{
 			"name": "consults",
-			"item": []
+			"item": [
+				{
+					"name": "getAllConsults",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/consults",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"consults"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificConsult",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/consults/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"consults",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "63520c9c0a55406bf99edf05"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createConsult",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2022-10-20\",\r\n    \"patient\": \"6342cbd7d1a9f8c8aa82e40d\",\r\n    \"reason\": \"Dolor de estomago\",\r\n    \"prevDate\": \"6350b3c9fa1b86f24c31323d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/consults",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"consults"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateConsult",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2022-10-20\",\r\n    \"patient\": \"6342cbd7d1a9f8c8aa82e40d\",\r\n    \"reason\": \"Dolor de estomago\",\r\n    \"prevDate\": \"6350b3c9fa1b86f24c31323d\",\r\n    \"startHour\": \"12:00\",\r\n    \"diagnostic\": [\"Varicela\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/consults/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"consults",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "63520c9c0a55406bf99edf05"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSpecificConsult",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/consults/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"consults",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "63520c7367339c71e2d914c8"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "prescriptions",
@@ -905,9 +1030,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/users/auth",
+							"raw": "{{SERVER}}/users/auth",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"users",
@@ -1054,7 +1179,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzRhMTZmNDE4ZmJjZTVkNjlmOWM4NWMiLCJmaXJzdF9uYW1lIjoiSmF2aWVyIEFsZXhhbmRlciIsImxhc3RfbmFtZSI6Ik1vcmFsZXMgTWVsYXJhIiwiZW1haWwiOiJqYXZpZXJtb3JhbGVzbWVsYXJhQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiIiwiYXZhdGFyIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MlB6Q0ZaXzFod29EZFBiaDFHdU91dmFZSHFMVWstLXh2T2hZN2NrZz1zOTYtYyIsInBsYXRmb3JtIjoiR09PR0xFIiwiY3JlYXRlZEF0IjoiMjAyMi0xMC0xNVQwMjoxMjowNC4wNjNaIiwidXBkYXRlZEF0IjoiMjAyMi0xMC0xNVQwMjoxMjowNC4wNjNaIiwiaWF0IjoxNjY2MjMyMzEwLCJleHAiOjE2NjY4MzcxMTB9.jaQxrRYzvT1aI_Ui_HlQysI6RJP4dIIs0EReQxHmIpc",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzU1ZDEwM2RhZWY5NzA0YzNhNDZjZTkiLCJmaXJzdF9uYW1lIjoiSmF2aWVyIiwibGFzdF9uYW1lIjoiTW9yYWxlcyIsImVtYWlsIjoiamF2aWVybW9yYWxlc21lbGFyYUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiIsImF2YXRhciI6Imh0dHBzOi8vcGxhdGZvcm0tbG9va2FzaWRlLmZic2J4LmNvbS9wbGF0Zm9ybS9wcm9maWxlcGljLz9hc2lkPTM0MzU2Nzg2OTY2NTM0MzcmaGVpZ2h0PTUwJndpZHRoPTUwJmV4dD0xNjY5MTYwNDUxJmhhc2g9QWVUNW9tZTFxQ1FCVnNON1ZvNCIsInBsYXRmb3JtIjoiRkFDRUJPT0siLCJjcmVhdGVkQXQiOiIyMDIyLTEwLTIzVDIzOjQwOjUxLjYxNFoiLCJ1cGRhdGVkQXQiOiIyMDIyLTEwLTIzVDIzOjQwOjUxLjYxNFoiLCJpYXQiOjE2NjY1Njg3MzIsImV4cCI6MTY2NzE3MzUzMn0.SpeIATvRdUCNQWckB2iFDeK-RGxZCcQmSnLVa0S_XgE",
 				"type": "string"
 			}
 		]

@@ -6,21 +6,21 @@ import {
   create,
   update,
   deleteSpecific
-} from '../services/DateServices.js'
+} from '../services/AppointmentServices.js'
 import { authenticateToken } from '../helpers/jwt.js'
 
 const router = Router()
 
-// GET /api/dates/ || /api/dates?booked_by=
+// GET /api/appointment/ || /api/appointment?booked_by=
 router.get('/', authenticateToken, getAll)
-// GET /api/dates/:_id
+// GET /api/appointment/:_id
 router.get(
   '/:_id',
   authenticateToken,
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   getSpecific
 )
-// POST /api/dates/
+// POST /api/appointment/
 router.post(
   '/',
   authenticateToken,
@@ -32,7 +32,7 @@ router.post(
   body('reason').notEmpty().withMessage('La razón no es válida'),
   create
 )
-// PUT /api/dates/:_id
+// PUT /api/appointment/:_id
 router.put(
   '/:_id',
   authenticateToken,
@@ -45,7 +45,7 @@ router.put(
   body('reason').notEmpty().withMessage('La razón no es válida'),
   update
 )
-// DELETE /api/dates/:_id
+// DELETE /api/appointment/:_id
 router.delete(
   '/:_id',
   authenticateToken,
