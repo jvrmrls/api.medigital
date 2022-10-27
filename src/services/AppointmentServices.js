@@ -56,11 +56,11 @@ export async function create(req, res) {
     }
     const { name, reason, date, hour, observations, status } = req.body
     const _appointment = AppointmentModel({
-      name,
-      reason,
+      name: name.toUpperCase(),
+      reason: reason.toUpperCase(),
       date,
       hour,
-      observations,
+      observations: observations.toUpperCase(),
       booked_by: req.user._id,
       status
     })
@@ -81,11 +81,11 @@ export async function update(req, res) {
     const { _id } = req.params
     const { name, reason, date, hour, observations, status } = req.body
     const _appointment = {
-      name,
-      reason,
+      name: name.toUpperCase(),
+      reason: reason.toUpperCase(),
       date,
       hour,
-      observations,
+      observations: observations.toUpperCase(),
       status
     }
     const _data = await AppointmentModel.findByIdAndUpdate(
