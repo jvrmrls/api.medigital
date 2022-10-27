@@ -55,13 +55,12 @@ export async function create(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     const { name, reason, date, hour, observations, status } = req.body
-    console.log(name.toUpperCase())
     const _appointment = AppointmentModel({
-      name: name.toUpperCase() || null,
-      reason: reason.toUpperCase() || null,
+      name: name?.toUpperCase(),
+      reason: reason?.toUpperCase(),
       date,
       hour,
-      observations: observations.toUpperCase() || null,
+      observations: observations?.toUpperCase(),
       booked_by: req.user._id,
       status
     })
@@ -82,11 +81,11 @@ export async function update(req, res) {
     const { _id } = req.params
     const { name, reason, date, hour, observations, status } = req.body
     const _appointment = {
-      name: name.toUpperCase() || null,
-      reason: reason.toUpperCase() || null,
+      name: name?.toUpperCase(),
+      reason: reason?.toUpperCase(),
       date,
       hour,
-      observations: observations.toUpperCase() || null,
+      observations: observations?.toUpperCase(),
       status
     }
     const _data = await AppointmentModel.findByIdAndUpdate(
