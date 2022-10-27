@@ -9,13 +9,15 @@ export async function getAll(req, res) {
     const { booked_by, date } = req.query
     if (booked_by) query = { ...query, booked_by: req.user._id }
     if (date) query = { ...query, date }
-    const _data = await AppointmentModel.find(query).populate('booked_by', {
-      _id: 0,
-      password: 0,
-      platform: 0,
-      createdAt: 0,
-      updatedAt: 0
-    })
+    const _data = await AppointmentModel.find(query)
+      .sort({ date: 'ASC' })
+      .populate('booked_by', {
+        _id: 0,
+        password: 0,
+        platform: 0,
+        createdAt: 0,
+        updatedAt: 0
+      })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {
