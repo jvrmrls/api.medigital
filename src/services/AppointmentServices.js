@@ -139,17 +139,21 @@ export async function getAvailable(req, res) {
       status: 'PENDING'
     }).select({ hour: 1, _id: 0 })
     // VERIFY THE AVAILABLE
-    const _available = businessHours.filter((elementi) => {
-      return _appointments.map((item) => item.hour).indexOf(elementi) < 0
-        ? true
-        : false
+    const _available = businessHours.map((element) => {
+      return {
+        ...element,
+        status:
+          _appointments.map((item) => item.hour).indexOf(element.hour) < 0
+            ? true
+            : false
+      }
     })
     // SEPARATE THE AVAILABLE INTO TWO ARAYS - morning and afternoon
     const morningBusinessHours = _available.filter(
-      (item) => item.split(':')[0] < 12
+      (item) => item.hour.split(':')[0] < 12
     )
     const afternoonBusinessHours = _available.filter(
-      (item) => parseInt(item.split(':')[0]) > 12
+      (item) => parseInt(item.hour.split(':')[0]) > 12
     )
     return res
       .status(200)

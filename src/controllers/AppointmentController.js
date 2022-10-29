@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { param, body } from 'express-validator'
+import { param, body, query } from 'express-validator'
 import {
   getAll,
   getSpecific,
@@ -14,8 +14,13 @@ const router = Router()
 
 // GET /api/appointment/ || /api/appointment?booked_by=
 router.get('/', authenticateToken, getAll)
-// GET /api/appointment/available?date=
-router.get('/available', authenticateToken, getAvailable)
+// GET /api/appointment/available-hours?date=
+router.get(
+  '/available-hours',
+  authenticateToken,
+  query('date').isDate().withMessage('La fecha es requerida'),
+  getAvailable
+)
 // GET /api/appointment/:_id
 router.get(
   '/:_id',
