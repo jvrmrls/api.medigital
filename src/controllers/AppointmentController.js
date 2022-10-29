@@ -5,7 +5,8 @@ import {
   getSpecific,
   create,
   update,
-  deleteSpecific
+  deleteSpecific,
+  getAvailable
 } from '../services/AppointmentServices.js'
 import { authenticateToken } from '../helpers/jwt.js'
 
@@ -13,6 +14,8 @@ const router = Router()
 
 // GET /api/appointment/ || /api/appointment?booked_by=
 router.get('/', authenticateToken, getAll)
+// GET /api/appointment/available?date=
+router.get('/available', authenticateToken, getAvailable)
 // GET /api/appointment/:_id
 router.get(
   '/:_id',
@@ -52,4 +55,5 @@ router.delete(
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   deleteSpecific
 )
+
 export default router

@@ -1,5 +1,8 @@
 import { validationResult } from 'express-validator'
 import _ from 'lodash'
+import moment from 'moment'
+// Import business hours
+import { businessHours } from '../helpers/info.js'
 // Import model
 import AppointmentModel from '../models/AppointmentModel.js'
 
@@ -115,6 +118,42 @@ export async function deleteSpecific(req, res) {
     const _appointment = await AppointmentModel.findByIdAndRemove(_id)
     /* Returning the response to the client. */
     return res.status(200).json(_appointment)
+  } catch (err) {
+    /* Returning the response to the client. */
+    return res.status(500).json(err)
+  }
+}
+
+export async function getAvailable(req, res) {
+  try {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() })
+    }
+    const { date } = req.query
+    const _appointments = await AppointmentModel.find({
+      date: {
+        $gte: moment(date).startOf('day'),
+        $lte: moment(date).endOf('day')
+      },
+      status: 'PENDING'
+    }).select({ hour: 1, _id: 0 })
+    // VERIFY THE AVAILABLE
+    const _available = businessHours.filter((elementi) => {
+      return _appointments.map((item) => item.hour).indexOf(elementi) < 0
+        ? true
+        : false
+    })
+    // SEPARATE THE AVAILABLE INTO TWO ARAYS - morning and afternoon
+    const morningBusinessHours = _available.filter(
+      (item) => item.split(':')[0] < 12
+    )
+    const afternoonBusinessHours = _available.filter(
+      (item) => parseInt(item.split(':')[0]) > 12
+    )
+    return res
+      .status(200)
+      .json({ date, morningBusinessHours, afternoonBusinessHours })
   } catch (err) {
     /* Returning the response to the client. */
     return res.status(500).json(err)
