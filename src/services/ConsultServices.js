@@ -9,18 +9,27 @@ export async function getAll(req, res) {
     const { status, date } = req.query
     if (status) query = { ...query, status }
     if (date) query = { ...query, date }
-    const _data = await ConsultModel.find(query).populate('prev_date', {
-      name: 0,
-      observations: 0,
-      reason: 0,
-      booked_by: 0,
-      status: 0,
-      createdAt: 0,
-      updatedAt: 0
-    })
+    const _data = await ConsultModel.find(query)
+      .populate('prev_appointment', {
+        name: 0,
+        observations: 0,
+        reason: 0,
+        booked_by: 0,
+        status: 0
+      })
+      .populate('patient', { first_name: 1, last_name: 1 })
+      .populate({
+        path: 'doctor',
+        populate: {
+          path: 'employee',
+          select: { first_name: 1, last_name: 1 }
+        },
+        select: { employee: 1 }
+      })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {
+    console.log(err)
     /* Returning the response to the client. */
     return res.status(500).json(err)
   }
@@ -33,15 +42,20 @@ export async function getSpecific(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
-    const _data = await ConsultModel.findOne({ _id }).populate('prev_date', {
-      name: 0,
-      observations: 0,
-      reason: 0,
-      booked_by: 0,
-      status: 0,
-      createdAt: 0,
-      updatedAt: 0
-    })
+    const _data = await ConsultModel.findOne({ _id })
+      .populate('prev_appointment', {
+        date: 1,
+        hour: 1
+      })
+      .populate('patient', { first_name: 1, last_name: 1 })
+      .populate({
+        path: 'doctor',
+        populate: {
+          path: 'employee',
+          select: { first_name: 1, last_name: 1 }
+        },
+        select: { employee: 1 }
+      })
     if (!_data) return res.status(400).json({ msg: 'No se encontró la cita' })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
@@ -57,14 +71,15 @@ export async function create(req, res) {
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() })
     }
-    const { date, patient, doctor, reason, observations, prevDate } = req.body
+    const { date, patient, doctor, reason, observations, prevAppointment } =
+      req.body
     const _consult = ConsultModel({
       date,
       patient,
       doctor,
       reason,
       observations,
-      prev_date: prevDate
+      prev_appointment: prevAppointment
     })
     await _consult.save()
     return res.status(201).json(_consult)
@@ -92,7 +107,7 @@ export async function update(req, res) {
       medicalRecord,
       diagnostic,
       observations,
-      prevDate,
+      prevAppointment,
       status
     } = req.body
     const _consult = {
@@ -106,7 +121,7 @@ export async function update(req, res) {
       medical_record: medicalRecord,
       diagnostic,
       observations,
-      prev_date: prevDate,
+      prev_appointment: prevAppointment,
       status
     }
     const _data = await ConsultModel.findByIdAndUpdate(

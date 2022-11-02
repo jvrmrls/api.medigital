@@ -32,6 +32,13 @@ const commonUserSchema = Schema(
   },
   { timestamps: true, versionKey: false }
 )
+
+commonUserSchema.methods.toJSON = function () {
+  var obj = this.toObject()
+  delete obj.createdAt
+  delete obj.updatedAt
+  return obj
+}
 /* Creating a model called CommonUserModel. */
 const CommonUserModel = mongoose.model('CommonUser', commonUserSchema)
 export default CommonUserModel

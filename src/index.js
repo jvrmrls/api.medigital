@@ -22,6 +22,9 @@ import PrescriptionController from './controllers/PrescriptionController.js'
 import UserController from './controllers/UserController.js'
 import EmployeeController from './controllers/EmployeeController.js'
 import ConsultController from './controllers/ConsultController.js'
+import DoctorController from './controllers/DoctorController.js'
+import MedicineController from './controllers/MedicineController.js'
+import MovementController from './controllers/MovementController.js'
 
 /**
  * REQUIRED CONSTANTS
@@ -52,6 +55,9 @@ app.use('/api/prescriptions', PrescriptionController)
 app.use('/api/users', UserController)
 app.use('/api/employees', EmployeeController)
 app.use('/api/consults', ConsultController)
+app.use('/api/doctors', DoctorController)
+app.use('/api/medicines', MedicineController)
+app.use('/api/movements', MovementController)
 
 /**
  * LISTENING APP

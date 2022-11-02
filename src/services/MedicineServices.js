@@ -1,14 +1,14 @@
 import { validationResult } from 'express-validator'
 import _ from 'lodash'
 // Import model
-import EmployeeModel from '../models/EmployeeModel.js'
+import MedicineModel from '../models/MedicineModel.js'
 
 export async function getAll(req, res) {
   try {
-    const _data = await EmployeeModel.find({}).populate('user', {
-      password: 0,
-      status: 0
-    })
+    let query = {}
+    const { available } = req.query
+    if (available) query = { ...query, quantity: { $gt: 0 } }
+    const _data = await MedicineModel.find(query)
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {
@@ -24,10 +24,7 @@ export async function getSpecific(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
-    const _data = await EmployeeModel.findOne({ _id }).populate('user', {
-      password: 0,
-      status: 0
-    })
+    const _data = await MedicineModel.findOne({ _id })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {
@@ -41,37 +38,15 @@ export async function create(req, res) {
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() })
     }
-    const {
-      firstName,
-      lastName,
-      dui,
-      isss,
-      afp,
-      birthday,
-      phoneNumber,
-      email,
-      address,
-      department,
-      municipality,
-      user,
-      isActive
-    } = req.body
-    const _employee = {
-      first_name: firstName,
-      last_name: lastName,
-      dui,
-      isss,
-      afp,
-      birthday,
-      phone_number: phoneNumber,
-      email,
-      address,
-      department,
-      municipality,
-      user,
-      is_active: isActive
+    const { register, name, owner, activePrinciple, usage } = req.body
+    const _medicine = {
+      register,
+      name,
+      owner,
+      active_principle: activePrinciple,
+      usage
     }
-    const _data = EmployeeModel(_.omitBy(_employee, _.isNull))
+    const _data = MedicineModel(_.omitBy(_medicine, _.isNull))
     await _data.save()
     /* Returning the response to the client. */
     return res.status(201).json(_data)
@@ -88,39 +63,17 @@ export async function update(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
-    const {
-      firstName,
-      lastName,
-      dui,
-      isss,
-      afp,
-      birthday,
-      phoneNumber,
-      email,
-      address,
-      department,
-      municipality,
-      user,
-      isActive
-    } = req.body
-    const _employee = {
-      first_name: firstName,
-      last_name: lastName,
-      dui,
-      isss,
-      afp,
-      birthday,
-      phone_number: phoneNumber,
-      email,
-      address,
-      department,
-      municipality,
-      user,
-      is_active: isActive
+    const { register, name, owner, activePrinciple, usage } = req.body
+    const _medicine = {
+      register,
+      name,
+      owner,
+      active_principle: activePrinciple,
+      usage
     }
-    const _data = await EmployeeModel.findByIdAndUpdate(
+    const _data = await MedicineModel.findByIdAndUpdate(
       _id,
-      _.omitBy(_employee, _.isNull),
+      _.omitBy(_medicine, _.isNull),
       {
         new: true
       }
@@ -140,9 +93,9 @@ export async function deleteSpecific(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
-    const _employee = await EmployeeModel.findByIdAndRemove(_id)
+    const _medicine = await MedicineModel.findByIdAndRemove(_id)
     /* Returning the response to the client. */
-    return res.status(200).json(_employee)
+    return res.status(200).json(_medicine)
   } catch (err) {
     /* Returning the response to the client. */
     return res.status(500).json(err)

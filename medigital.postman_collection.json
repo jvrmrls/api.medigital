@@ -513,13 +513,37 @@
 					"response": []
 				},
 				{
+					"name": "getAvailableHoursAppointment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/appointments/available-hours?date=2022-10-27",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"appointments",
+								"available-hours"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-10-27"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "createAppointment",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Javier Alexander Morales Melara\",\r\n    \"date\": \"2022-10-27T06:00:00Z\",\r\n    \"hour\": \"10:00\",\r\n    \"reason\": \"Dolor de cabeza\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Javier Alexander Morales Melara\",\r\n    \"date\": \"2022-10-31T06:00:00Z\",\r\n    \"hour\": \"11:30\",\r\n    \"reason\": \"Dolor de estomago\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -545,7 +569,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"_id\": \"6350b3c9fa1b86f24c31323d\",\r\n    \"name\": \"Javier Alexander Morales Melara\",\r\n    \"date\": \"2022-10-12\",\r\n    \"hour\": \"8:00\",\r\n    \"reason\": \"Dolor de la planta baja del pie\",\r\n    \"observations\": \"El usuario realizo la cita por la plataforma\",\r\n    \"status\": \"PENDING\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Javier Alexander Morales Melara\",\r\n    \"date\": \"2022-10-31T06:00:00Z\",\r\n    \"hour\": \"08:30\",\r\n    \"reason\": \"GRIPE\",\r\n    \"status\": \"PENDING\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -564,7 +588,7 @@
 							"variable": [
 								{
 									"key": "_id",
-									"value": "6350b3c9fa1b86f24c31323d"
+									"value": "635c989d867004de2c9ae8d8"
 								}
 							]
 						}
@@ -589,30 +613,6 @@
 								{
 									"key": "_id",
 									"value": "635a10d95a540861cfd70123"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getAvailable",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{HOST}}/appointments/available?date=2022-10-27",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"appointments",
-								"available"
-							],
-							"query": [
-								{
-									"key": "date",
-									"value": "2022-10-27"
 								}
 							]
 						}
@@ -658,7 +658,7 @@
 							"variable": [
 								{
 									"key": "_id",
-									"value": "63520c9c0a55406bf99edf05"
+									"value": "63629b592c91b3d5101f3f07"
 								}
 							]
 						}
@@ -672,7 +672,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"date\": \"2022-10-20\",\r\n    \"patient\": \"6342cbd7d1a9f8c8aa82e40d\",\r\n    \"reason\": \"Dolor de estomago\",\r\n    \"prevDate\": \"6350b3c9fa1b86f24c31323d\"\r\n}",
+							"raw": "{\r\n    \"date\": \"2022-10-20\",\r\n    \"patient\": \"6342cbd7d1a9f8c8aa82e40d\",\r\n    \"reason\": \"Dolor de estomago\",\r\n    \"prevAppointment\": \"635c989d867004de2c9ae8d8\",\r\n    \"doctor\": \"63629a660254160a10b352e8\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -741,7 +741,7 @@
 							"variable": [
 								{
 									"key": "_id",
-									"value": "63520c7367339c71e2d914c8"
+									"value": "63629a6f0254160a10b352ea"
 								}
 							]
 						}
@@ -1197,6 +1197,359 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "doctors",
+			"item": [
+				{
+					"name": "getAllDoctors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/doctors",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificDoctor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/doctors/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"doctors",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createDoctor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employee\": \"634e39edc8c0d50f6d9ce04c\",\r\n    \"specialties\": [\"Dermatologia\", \"Cardiologia\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/doctors",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateDoctor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employee\": \"634e39edc8c0d50f6d9ce04c\",\r\n    \"specialties\": [\"Dermatologia\", \"Cardiologia\", \"Pulmologia\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/doctors/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"doctors",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "63627aa0ec20ea4293d7b16f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDoctor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/doctors/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"doctors",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "63627aa0ec20ea4293d7b16f"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "medicines",
+			"item": [
+				{
+					"name": "getAllMedicines",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/medicines",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"medicines"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAvailableMedicines",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/medicines?available=true",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"medicines"
+							],
+							"query": [
+								{
+									"key": "available",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificMedicine",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/medicines/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"medicines",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createMedicine",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/medicines",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"medicines"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateMedicine",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"tesdt\",\r\n    \"usage\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/medicines/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"medicines",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "636294795f497cda6a085897"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteMedicine",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/medicines/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"medicines",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "636294795f497cda6a085897"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "movements",
+			"item": [
+				{
+					"name": "getAllMovements",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/movements",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"movements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificMovement",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/movements/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"movements",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createMovement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"medicine\": \"636293f7160a76c1535af64e\",\r\n    \"quantity\": 3,\r\n    \"type\": \"IN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/movements",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"movements"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"auth": {
@@ -1204,7 +1557,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzU1ZDEwM2RhZWY5NzA0YzNhNDZjZTkiLCJmaXJzdF9uYW1lIjoiSmF2aWVyIiwibGFzdF9uYW1lIjoiTW9yYWxlcyIsImVtYWlsIjoiamF2aWVybW9yYWxlc21lbGFyYUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiIsImF2YXRhciI6Imh0dHBzOi8vcGxhdGZvcm0tbG9va2FzaWRlLmZic2J4LmNvbS9wbGF0Zm9ybS9wcm9maWxlcGljLz9hc2lkPTM0MzU2Nzg2OTY2NTM0MzcmaGVpZ2h0PTUwJndpZHRoPTUwJmV4dD0xNjY5MTYwNDUxJmhhc2g9QWVUNW9tZTFxQ1FCVnNON1ZvNCIsInBsYXRmb3JtIjoiRkFDRUJPT0siLCJjcmVhdGVkQXQiOiIyMDIyLTEwLTIzVDIzOjQwOjUxLjYxNFoiLCJ1cGRhdGVkQXQiOiIyMDIyLTEwLTIzVDIzOjQwOjUxLjYxNFoiLCJpYXQiOjE2NjY1Njg3MzIsImV4cCI6MTY2NzE3MzUzMn0.SpeIATvRdUCNQWckB2iFDeK-RGxZCcQmSnLVa0S_XgE",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzRlMzllZGM4YzBkNTBmNmQ5Y2UwNGMiLCJmaXJzdF9uYW1lIjoiSmF2aWVyIEFsZXhhbmRlciIsImxhc3RfbmFtZSI6Ik1vcmFsZXMgTWVsYXJhIiwiZHVpIjoiMDU5MDQ2NjktNyIsImlzc3MiOiIiLCJhZnAiOiIiLCJiaXJ0aGRheSI6bnVsbCwicGhvbmVfbnVtYmVyIjpbIig1MDMpNzI3MC05NzI1IiwiKDUwMyk2MDIwLTg4MTIiXSwiZW1haWwiOiJqYXZpZXJtb3JhbGVzbWVsYXJhQGdtYWlsLmNvbSIsImFkZHJlc3MiOiIiLCJkZXBhcnRtZW50IjoiNjM0MmM1OWU1YjQ5NmRkZDcxYzFjMGZkIiwibXVuaWNpcGFsaXR5IjoiNjM0MmM2ZTI1YjQ5NmRkZDcxYzFjMTA4IiwidXNlciI6eyJfaWQiOiI2MzRlMzQ1NzZlZWUwNjhiYTY1YjczNTQiLCJ1c2VybmFtZSI6Imphdmllci5tb3JhbGVzIiwidHlwZSI6IkFETUlOIn0sImlzX2FjdGl2ZSI6dHJ1ZSwiY3JlYXRlZEF0IjoiMjAyMi0xMC0xOFQwNTozMDoyMS43MjVaIiwidXBkYXRlZEF0IjoiMjAyMi0xMC0xOVQwMjo1ODoxNS40NzBaIiwiaWF0IjoxNjY3NDA2NDM1LCJleHAiOjE2NjgwMTEyMzV9.HBqgxi39RK15_sV9vfkCBOslvVgah6AR4ffiL_FkxpI",
 				"type": "string"
 			}
 		]

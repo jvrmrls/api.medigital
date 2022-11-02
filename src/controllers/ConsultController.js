@@ -26,6 +26,7 @@ router.post(
   authenticateToken,
   body('date').isDate().withMessage('La fecha no es válida'),
   body('patient').isMongoId().withMessage('El ID de paciente no es válido'),
+  body('doctor').isMongoId().withMessage('El ID de doctor no es válido'),
   create
 )
 // PUT /api/consults/:_id
@@ -35,6 +36,7 @@ router.put(
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   body('date').isDate().withMessage('La fecha no es válida'),
   body('patient').isMongoId().withMessage('El ID de paciente no es válido'),
+  body('doctor').isMongoId().withMessage('El ID de doctor no es válido'),
   update
 )
 // DELETE /api/consults/:_id

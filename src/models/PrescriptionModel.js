@@ -30,6 +30,12 @@ const prescriptionSchema = Schema(
   },
   { timestamps: true, versionKey: false }
 )
+prescriptionSchema.methods.toJSON = function () {
+  var obj = this.toObject()
+  delete obj.createdAt
+  delete obj.updatedAt
+  return obj
+}
 /* Creating a model called PrescriptionModel. */
 const PrescriptionModel = mongoose.model('Prescription', prescriptionSchema)
 export default PrescriptionModel

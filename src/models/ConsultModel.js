@@ -24,7 +24,7 @@ const consultSchema = Schema(
     doctor: {
       type: Schema.Types.ObjectId,
       ref: 'Doctor',
-      default: null
+      required: true
     },
     reason: {
       type: String,
@@ -50,9 +50,9 @@ const consultSchema = Schema(
       type: String,
       default: ''
     },
-    prev_date: {
+    prev_appointment: {
       type: Schema.Types.ObjectId,
-      ref: 'Date',
+      ref: 'Appointment',
       default: null
     },
     status: {
@@ -63,6 +63,12 @@ const consultSchema = Schema(
   },
   { timestamps: true, versionKey: false }
 )
+consultSchema.methods.toJSON = function () {
+  var obj = this.toObject()
+  delete obj.createdAt
+  delete obj.updatedAt
+  return obj
+}
 /* Creating a model called ConsultModel. */
 const ConsultModel = mongoose.model('Consult', consultSchema)
 export default ConsultModel

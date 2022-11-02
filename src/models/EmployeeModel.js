@@ -62,6 +62,12 @@ const employeeSchema = Schema(
   },
   { timestamps: true, versionKey: false }
 )
+employeeSchema.methods.toJSON = function () {
+  var obj = this.toObject()
+  delete obj.createdAt
+  delete obj.updatedAt
+  return obj
+}
 /* Creating a model called EmployeeModel. */
 const EmployeeModel = mongoose.model('Employee', employeeSchema)
 export default EmployeeModel

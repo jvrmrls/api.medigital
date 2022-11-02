@@ -24,6 +24,12 @@ const doctorSchema = Schema(
   },
   { timestamps: true, versionKey: false }
 )
+doctorSchema.methods.toJSON = function () {
+  var obj = this.toObject()
+  delete obj.createdAt
+  delete obj.updatedAt
+  return obj
+}
 /* Creating a model called DoctorModel. */
 const DoctorModel = mongoose.model('Doctor', doctorSchema)
 export default DoctorModel

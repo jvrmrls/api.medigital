@@ -19,6 +19,12 @@ const departmentSchema = Schema(
   },
   { timestamps: true, versionKey: false }
 )
+departmentSchema.methods.toJSON = function () {
+  var obj = this.toObject()
+  delete obj.createdAt
+  delete obj.updatedAt
+  return obj
+}
 /* Creating a model called DepartmentModel. */
 const DepartmentModel = mongoose.model('Department', departmentSchema)
 export default DepartmentModel

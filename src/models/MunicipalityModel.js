@@ -23,6 +23,12 @@ const municipalitySchema = Schema(
   },
   { timestamps: true, versionKey: false }
 )
+municipalitySchema.methods.toJSON = function () {
+  var obj = this.toObject()
+  delete obj.createdAt
+  delete obj.updatedAt
+  return obj
+}
 /* Creating a model called MunicipalityModel. */
 const MunicipalityModel = mongoose.model('Municipality', municipalitySchema)
 export default MunicipalityModel
