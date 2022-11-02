@@ -143,7 +143,7 @@ export async function getAvailable(req, res) {
       return {
         ...element,
         status:
-          _appointments.map((item) => item.hour).in.dexOf(element.hour) < 0
+          _appointments.map((item) => item.hour).indexOf(element.hour) < 0
             ? true
             : false
       }
@@ -159,6 +159,7 @@ export async function getAvailable(req, res) {
       .status(200)
       .json({ date, morningBusinessHours, afternoonBusinessHours })
   } catch (err) {
+    console.log(err)
     /* Returning the response to the client. */
     return res.status(500).json(err)
   }
