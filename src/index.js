@@ -25,6 +25,7 @@ import ConsultController from './controllers/ConsultController.js'
 import DoctorController from './controllers/DoctorController.js'
 import MedicineController from './controllers/MedicineController.js'
 import MovementController from './controllers/MovementController.js'
+import DiagnosticController from './controllers/DiagnosticController.js'
 
 /**
  * REQUIRED CONSTANTS
@@ -58,6 +59,7 @@ app.use('/api/consults', ConsultController)
 app.use('/api/doctors', DoctorController)
 app.use('/api/medicines', MedicineController)
 app.use('/api/movements', MovementController)
+app.use('/api/diagnostics', DiagnosticController)
 
 /**
  * LISTENING APP

@@ -4,10 +4,14 @@ import _ from 'lodash'
 // Import model
 import PrescriptionModel from '../models/PrescriptionModel.js'
 import ConsultModel from '../models/ConsultModel.js'
+import MedicineModel from '../models/MedicineModel.js'
 
 export async function getAll(req, res) {
   try {
-    const _data = await PrescriptionModel.find({})
+    const _data = await PrescriptionModel.find({}).populate(
+      'details.medicine',
+      { name: 1, owner: 1 }
+    )
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {
@@ -20,7 +24,10 @@ export async function getSpecific(req, res) {
   try {
     const { _id } = req.params
     /* A query to the database. */
-    const _data = await PrescriptionModel.findById(_id)
+    const _data = await PrescriptionModel.findById(_id).populate(
+      'details.medicine',
+      { name: 1, owner: 1 }
+    )
     if (!_data) return res.status(400).json({ msg: 'No se encontró la receta' })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
@@ -80,6 +87,11 @@ export async function createDetail(req, res) {
     }
     const { _id } = req.params
     const { medicine, quantity, dose } = req.body
+    // Verify if medicine exists
+    const _medicine = await MedicineModel.findById(medicine)
+    if (!_medicine) {
+      return res.status(400).json({ msg: 'La medicina no existe' })
+    }
     const detailToInsert = { medicine, quantity, dose }
     const _prescription = await PrescriptionModel.findById(_id)
 

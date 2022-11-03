@@ -21,10 +21,9 @@ const detailPrescriptionSchema = Schema({
 const prescriptionSchema = Schema(
   {
     consult: {
-      /*  type: Schema.Types.ObjectId,
-      ref: 'Consult', */
-      type: String,
-      default: ''
+      type: Schema.Types.ObjectId,
+      ref: 'Consult',
+      required: true
     },
     details: [{ type: detailPrescriptionSchema }]
   },
