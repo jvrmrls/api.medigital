@@ -788,7 +788,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "634c80f5dc92a82f0d8a44f0"
+									"value": "63632888d8c1271cd7b9252e"
 								}
 							]
 						}
@@ -802,7 +802,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"consult\": \"634c80f5dc92a82f0d8a44f0\"\r\n}",
+							"raw": "{\r\n    \"consult\": \"63629b592c91b3d5101f3f07\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -829,7 +829,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"medicine\" : \"634c8ae4d133b79506bd8036\",\r\n    \"quantity\": 20,\r\n    \"dose\": \"Una cada hora\"\r\n}",
+							"raw": "{\r\n    \"medicine\" : \"636293f7160a76c1535af64f\",\r\n    \"quantity\": 10,\r\n    \"dose\": \"Una cada dia\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -849,7 +849,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "634c8ae4d133b79506bd8036"
+									"value": "63632888d8c1271cd7b9252e"
 								}
 							]
 						}
@@ -1387,7 +1387,7 @@
 							"variable": [
 								{
 									"key": "_id",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -1544,6 +1544,77 @@
 							],
 							"path": [
 								"movements"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "diagnostics",
+			"item": [
+				{
+					"name": "getAllDiagnostics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/diagnostics",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"diagnostics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificDiagnostic",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/diagnostics/:_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"diagnostics",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSpecificDiagnosticByCode",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/diagnostics/code/:code",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"diagnostics",
+								"code",
+								":code"
+							],
+							"variable": [
+								{
+									"key": "code",
+									"value": "1"
+								}
 							]
 						}
 					},
