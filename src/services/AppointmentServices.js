@@ -164,3 +164,19 @@ export async function getAvailable(req, res) {
     return res.status(500).json(err)
   }
 }
+
+export async function getTomorrowAppointments() {
+  try {
+    const _appointments = await AppointmentModel.find({
+      date: {
+        $gte: moment().add(1, 'days').format('YYYY-MM-DD'),
+        $lte: moment().add(2, 'days').format('YYYY-MM-DD')
+      }
+    })
+      .populate('booked_by', { email: 1, first_name: 1 })
+      .select({ booked_by: 1, reason: 1, date: 1, hour: 1 })
+    return _appointments
+  } catch (err) {
+    return err
+  }
+}

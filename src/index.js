@@ -11,13 +11,16 @@
 import express from 'express'
 import 'dotenv/config'
 import cors from 'cors'
+import cron from 'node-cron'
 
 import conn from './database/mongo.js'
 import PatientController from './controllers/PatientController.js'
 import MunicipalityController from './controllers/MunicipalityController.js'
 import DepartmentController from './controllers/DepartmentController.js'
 import CommonUserController from './controllers/CommonUserController.js'
-import AppointmentController from './controllers/AppointmentController.js'
+import AppointmentController, {
+  sendMailForTomorrow
+} from './controllers/AppointmentController.js'
 import PrescriptionController from './controllers/PrescriptionController.js'
 import UserController from './controllers/UserController.js'
 import EmployeeController from './controllers/EmployeeController.js'
@@ -37,6 +40,10 @@ const port = process.env.PORT || 3000
  */
 
 const app = express()
+
+cron.schedule('0 0 0 * * *', () => {
+  sendMailForTomorrow()
+})
 
 // CONNECT TO DB
 conn()

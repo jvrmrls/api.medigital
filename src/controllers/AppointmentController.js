@@ -6,9 +6,12 @@ import {
   create,
   update,
   deleteSpecific,
-  getAvailable
+  getAvailable,
+  getTomorrowAppointments
 } from '../services/AppointmentServices.js'
 import { authenticateToken } from '../helpers/jwt.js'
+import nodemailer from 'nodemailer'
+import moment from 'moment'
 
 const router = Router()
 
@@ -60,5 +63,40 @@ router.delete(
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   deleteSpecific
 )
+
+const transporter = nodemailer.createTransport({
+  service: 'outlook',
+  auth: {
+    user: process.env.MAILER_USER,
+    pass: process.env.MAILER_PASSWORD
+  },
+  tls: {
+    rejectUnauthorized: false
+  }
+})
+
+// Send Mail
+export const sendMailForTomorrow = async () => {
+  try {
+    const appointments = await getTomorrowAppointments()
+    if (appointments.length <= 0) return
+    await Promise.all(
+      appointments.map((element) => {
+        const mailOpt = {
+          from: process.env.MAILER_USER,
+          to: element.booked_by.email,
+          subject: `Recordatorio de cita medica MEDIGITAL #${element._id}`,
+          text: `Hola ${element.booked_by.first_name}. \n\nTe recordamos que el día de mañana tienes una cita en nuestras instalaciones a las ${element.hour} horas.\nRecuerda llevar tu cita impresa o en digital para facilitar el trámite de tu consulta. \n\nTe esperamos.`
+        }
+        transporter.sendMail(mailOpt, (err, success) => {
+          if (err) throw err
+          console.log(success)
+        })
+      })
+    )
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 export default router

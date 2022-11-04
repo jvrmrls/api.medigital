@@ -1,29 +1,7 @@
 import { validationResult } from 'express-validator'
 // Import model
 import DepartmentModel from '../models/DepartmentModel.js'
-/*
-import nodemailer from 'nodemailer'
 
-const transporter = nodemailer.createTransport({
-  service: 'outlook',
-  auth: {
-    user: process.env.MAILER_USER,
-    pass: process.env.MAILER_PASSWORD
-  },
-  tls: {
-    rejectUnauthorized: false
-  }
-})
-const mailOpt = {
-  from: process.env.MAILER_USER,
-  to: 'erk5530@gmail.com',
-  subject: 'Node Test Mailer',
-  text: 'Hello dear! '
-}
-transporter.sendMail(mailOpt, (err, success) => {
-  if (err) throw err
-  console.log(success)
-})*/
 export async function getAll(req, res) {
   try {
     const _data = await DepartmentModel.find({})
