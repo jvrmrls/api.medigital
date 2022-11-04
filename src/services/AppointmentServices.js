@@ -171,7 +171,8 @@ export async function getTomorrowAppointments() {
       date: {
         $gte: moment().add(1, 'days').format('YYYY-MM-DD'),
         $lte: moment().add(2, 'days').format('YYYY-MM-DD')
-      }
+      },
+      status: 'PENDING'
     })
       .populate('booked_by', { email: 1, first_name: 1 })
       .select({ booked_by: 1, reason: 1, date: 1, hour: 1 })
