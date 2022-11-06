@@ -80,7 +80,7 @@ export async function create(req, res) {
       doctor,
       reason,
       observations,
-      prev_appointment: prevAppointment
+      prev_appointment: prevAppointment !== '' ? prevAppointment : null
     })
     await _consult.save()
     if (prevAppointment) {
