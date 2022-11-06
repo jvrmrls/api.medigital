@@ -2,6 +2,7 @@ import { validationResult } from 'express-validator'
 import _ from 'lodash'
 // Import model
 import ConsultModel from '../models/ConsultModel.js'
+import AppointmentModel from '../models/AppointmentModel.js'
 
 export async function getAll(req, res) {
   try {
@@ -82,6 +83,11 @@ export async function create(req, res) {
       prev_appointment: prevAppointment
     })
     await _consult.save()
+    if (prevAppointment) {
+      await AppointmentModel.findByIdAndUpdate(prevAppointment, {
+        status: 'WAITING'
+      })
+    }
     return res.status(201).json(_consult)
   } catch (err) {
     /* Returning the response to the client. */
@@ -131,6 +137,11 @@ export async function update(req, res) {
         new: true
       }
     )
+    if (prevAppointment) {
+      await AppointmentModel.findByIdAndUpdate(prevAppointment, {
+        status
+      })
+    }
     return res.status(200).json(_data)
   } catch (err) {
     console.log(err)
@@ -147,6 +158,16 @@ export async function deleteSpecific(req, res) {
     }
     const { _id } = req.params
     const _consult = await ConsultModel.findByIdAndRemove(_id)
+    if (!_consult) {
+      return res
+        .status(400)
+        .json({ msg: 'No se encontro la consulta a eliminar' })
+    }
+    if (_consult.prev_appointment) {
+      await AppointmentModel.findByIdAndUpdate(_consult.prev_appointment, {
+        status: 'CANCELED'
+      })
+    }
     /* Returning the response to the client. */
     return res.status(200).json(_consult)
   } catch (err) {
