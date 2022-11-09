@@ -104,30 +104,30 @@ export async function update(req, res) {
     const { _id } = req.params
     const {
       date,
-      startHour,
-      endHour,
+      start_hour,
+      end_hour,
       patient,
       doctor,
       reason,
-      physicalFinding,
-      medicalRecord,
+      physical_finding,
+      medical_record,
       diagnostic,
       observations,
-      prevAppointment,
+      prev_appointment,
       status
     } = req.body
     const _consult = {
       date,
-      start_hour: startHour,
-      end_hour: endHour,
+      start_hour,
+      end_hour,
       patient,
       doctor,
       reason,
-      physical_finding: physicalFinding,
-      medical_record: medicalRecord,
+      physical_finding,
+      medical_record,
       diagnostic,
       observations,
-      prev_appointment: prevAppointment,
+      prev_appointment,
       status
     }
     const _data = await ConsultModel.findByIdAndUpdate(
