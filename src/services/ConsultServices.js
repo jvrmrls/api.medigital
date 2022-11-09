@@ -137,7 +137,7 @@ export async function update(req, res) {
         new: true
       }
     )
-    if (prevAppointment) {
+    if (prev_appointment) {
       await AppointmentModel.findByIdAndUpdate(prev_appointment, {
         status
       })
