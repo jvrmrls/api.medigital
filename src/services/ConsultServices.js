@@ -138,13 +138,12 @@ export async function update(req, res) {
       }
     )
     if (prevAppointment) {
-      await AppointmentModel.findByIdAndUpdate(prevAppointment, {
+      await AppointmentModel.findByIdAndUpdate(prev_appointment, {
         status
       })
     }
     return res.status(200).json(_data)
   } catch (err) {
-    console.log(err)
     /* Returning the response to the client. */
     return res.status(500).json(err)
   }
