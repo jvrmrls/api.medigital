@@ -41,7 +41,7 @@ const port = process.env.PORT || 3000
 
 const app = express()
 
-cron.schedule('* * * * *', () => {
+cron.schedule('0 0 0 * * *', () => {
   sendMailForTomorrow()
 })
 
