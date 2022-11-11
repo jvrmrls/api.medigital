@@ -50,6 +50,9 @@ export async function create(req, res) {
     if (!_consult) return res.status(400).json({ msg: 'La consulta no existe' })
     const _prescription = PrescriptionModel({ consult })
     await _prescription.save()
+    // Insert prescription on consult
+    _consult.prescriptions.push(_prescription._id)
+    await _consult.save()
     return res.status(201).json(_prescription)
   } catch (err) {
     /* Returning the response to the client. */
