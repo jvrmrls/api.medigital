@@ -8,7 +8,10 @@ import MedicineModel from '../models/MedicineModel.js'
 
 export async function getAll(req, res) {
   try {
-    const _data = await PrescriptionModel.find({}).populate(
+    let query = {}
+    const { consult } = req.query
+    if (consult) query = { ...query, consult }
+    const _data = await PrescriptionModel.find(query).populate(
       'details.medicine',
       { name: 1, owner: 1 }
     )
