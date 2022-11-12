@@ -29,10 +29,8 @@ movementSchema.methods.toJSON = function () {
   var obj = this.toObject()
   // FORMAT IN SPANISH TYPE MOVEMENT
   obj._type =
-    (obj.observations?.includes('!AJUSTE') ? 'AJUSTE DE ' : '') + obj.type ===
-    'IN'
-      ? 'CARGA'
-      : 'DESCARGA'
+    (obj.observations?.includes('!AJUSTE') ? 'AJUSTE DE ' : '') +
+    (obj.type === 'IN' ? 'CARGA' : 'DESCARGA')
   delete obj.createdAt
   delete obj.updatedAt
   return obj
