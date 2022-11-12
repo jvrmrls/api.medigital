@@ -6,10 +6,12 @@ import MovementModel from '../models/MovementModel.js'
 
 export async function getAll(req, res) {
   try {
-    const _data = await MovementModel.find({}).populate('medicine', {
-      name: 1,
-      owner: 1
-    })
+    const _data = await MovementModel.find({})
+      .populate('medicine', {
+        name: 1,
+        owner: 1
+      })
+      .sort({ createdAt: -1 })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {
@@ -25,10 +27,12 @@ export async function getSpecific(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
-    const _data = await MovementModel.findOne({ _id }).populate('medicine', {
-      name: 1,
-      owner: 1
-    })
+    const _data = await MovementModel.findOne({ _id })
+      .populate('medicine', {
+        name: 1,
+        owner: 1
+      })
+      .sort({ createdAt: -1 })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {
