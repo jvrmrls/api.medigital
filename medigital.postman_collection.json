@@ -15,9 +15,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/patients",
+							"raw": "{{SERVER}}/patients",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"patients"
@@ -57,7 +57,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\":\"Javier Alexander\",\r\n      \"lastName\": \"Morales Melara\",\r\n      \"phoneNumber\": [\"7270-9725\"],\r\n      \"birthday\": \"1999-07-18\",\r\n      \"gender\": \"M\",\r\n      \"dui\": \"05904669-7\",\r\n      \"address\": \"Col Ciudad Real, Casa 7\",\r\n      \"department\": \"6342c59e5b496ddd71c1c0f7\",\r\n      \"municipality\": \"6342c6e25b496ddd71c1c108\",\r\n      \"maritalStatus\": \"SINGLE\",\r\n      \"bloodType\": \"O-\",\r\n      \"familyHistory\":\"\",\r\n      \"personalHistory\":\"\",\r\n      \"responsibles\":[]\r\n}",
+							"raw": "{\r\n    \"firstName\":\"Keny Lisbeth\",\r\n      \"lastName\": \"Chavez Torres\",\r\n      \"phoneNumber\": [\"7596-8977\", \"6032-8899\"],\r\n      \"birthday\": \"1999-03-20\",\r\n      \"gender\": \"F\",\r\n      \"dui\": \"04256996-7\",\r\n      \"address\": \"Cton El Papalon\",\r\n      \"department\": \"6342c59e5b496ddd71c1c0f7\",\r\n      \"municipality\": \"6342c6e25b496ddd71c1c108\",\r\n      \"maritalStatus\": \"SINGLE\",\r\n      \"bloodType\": \"O-\",\r\n      \"familyHistory\":\"\",\r\n      \"personalHistory\":\"\",\r\n      \"responsibles\":[]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -65,9 +65,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/patients",
+							"raw": "{{SERVER}}/patients",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"patients"
@@ -505,7 +505,7 @@
 							"variable": [
 								{
 									"key": "_id",
-									"value": "63434800a31559ffdbf3b048"
+									"value": "635c989d867004de2c9ae8d8"
 								}
 							]
 						}
@@ -630,9 +630,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/consults",
+							"raw": "{{SERVER}}/consults",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"consults"
@@ -658,7 +658,7 @@
 							"variable": [
 								{
 									"key": "_id",
-									"value": "63629b592c91b3d5101f3f07"
+									"value": "636c71f159d9694bc2ceb7c6"
 								}
 							]
 						}
@@ -672,7 +672,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"date\": \"2022-10-20\",\r\n    \"patient\": \"6342cbd7d1a9f8c8aa82e40d\",\r\n    \"reason\": \"Dolor de estomago\",\r\n    \"prevAppointment\": \"635c989d867004de2c9ae8d8\",\r\n    \"doctor\": \"63629a660254160a10b352e8\"\r\n}",
+							"raw": "{\r\n    \"date\": \"2022-11-20\",\r\n    \"patient\": \"6342cbd7d1a9f8c8aa82e40d\",\r\n    \"reason\": \"Dolor de estomago\",\r\n    \"prevAppointment\": \"6362c9f6d8ec431a48b92831\",\r\n    \"doctor\": \"63629a660254160a10b352e8\",\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -698,7 +698,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"date\": \"2022-10-20\",\r\n    \"patient\": \"6342cbd7d1a9f8c8aa82e40d\",\r\n    \"reason\": \"Dolor de estomago\",\r\n    \"prevDate\": \"6350b3c9fa1b86f24c31323d\",\r\n    \"startHour\": \"12:00\",\r\n    \"diagnostic\": [\"Varicela\"]\r\n}",
+							"raw": "{\r\n    \"date\": \"2022-11-20\",\r\n    \"patient\": \"6342cbd7d1a9f8c8aa82e40d\",\r\n    \"doctor\": \"63629a660254160a10b352e8\",\r\n    \"reason\": \"Dolor de estomago\",\r\n    \"prev_appointment\": \"6362c9dbd8ec431a48b9282c\",\r\n    \"start_hour\": \"12:00\",\r\n    \"diagnostic\": [\"Varicela\"],\r\n    \"status\": \"WAITING\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -717,7 +717,7 @@
 							"variable": [
 								{
 									"key": "_id",
-									"value": "63520c9c0a55406bf99edf05"
+									"value": "636b109416e1c0a3417c7981"
 								}
 							]
 						}
@@ -730,9 +730,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/consults/:_id",
+							"raw": "{{SERVER}}/consults/:_id",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"consults",
@@ -741,7 +741,7 @@
 							"variable": [
 								{
 									"key": "_id",
-									"value": "63629a6f0254160a10b352ea"
+									"value": "6367e52b17f036b683855414"
 								}
 							]
 						}
@@ -766,6 +766,29 @@
 							"path": [
 								"prescriptions",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllPrescriptionsByConsult",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}/prescriptions?consult=636c71f159d9694bc2ceb7c6",
+							"host": [
+								"{{SERVER}}"
+							],
+							"path": [
+								"prescriptions"
+							],
+							"query": [
+								{
+									"key": "consult",
+									"value": "636c71f159d9694bc2ceb7c6"
+								}
 							]
 						}
 					},
@@ -802,7 +825,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"consult\": \"63629b592c91b3d5101f3f07\"\r\n}",
+							"raw": "{\r\n    \"consult\": \"636c71f159d9694bc2ceb7c6\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -837,9 +860,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/prescriptions/:id/detail",
+							"raw": "{{SERVER}}/prescriptions/:id/detail",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"prescriptions",
@@ -849,7 +872,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "63632888d8c1271cd7b9252e"
+									"value": "636db809db936dd8c873d9f4"
 								}
 							]
 						}
@@ -1120,7 +1143,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Javier Alexander\",\r\n    \"lastName\": \"Morales Melara\",\r\n    \"dui\": \"05904669-7\",\r\n    \"department\": \"6342c59e5b496ddd71c1c0fd\",\r\n    \"municipality\": \"6342c6e25b496ddd71c1c108\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Oscar Alexis\",\r\n    \"lastName\": \"Palacios Flores\",\r\n    \"dui\": \"02843123-7\",\r\n    \"department\": \"6342c59e5b496ddd71c1c0fd\",\r\n    \"municipality\": \"6342c6e25b496ddd71c1c108\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1128,9 +1151,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/employees",
+							"raw": "{{SERVER}}/employees",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"employees"
@@ -1207,9 +1230,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/doctors",
+							"raw": "{{SERVER}}/doctors",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"doctors"
@@ -1249,7 +1272,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"employee\": \"634e39edc8c0d50f6d9ce04c\",\r\n    \"specialties\": [\"Dermatologia\", \"Cardiologia\"]\r\n}",
+							"raw": "{\r\n    \"employee\": \"6368555b28ae45b60f8d9ffc\",\r\n    \"specialties\": [\"Dermatologia\", \"General\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1257,9 +1280,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/doctors",
+							"raw": "{{SERVER}}/doctors",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"doctors"
@@ -1353,9 +1376,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/medicines?available=true",
+							"raw": "{{SERVER}}/medicines?available=true",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"medicines"
@@ -1560,9 +1583,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/diagnostics",
+							"raw": "{{SERVER}}/diagnostics",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"diagnostics"
@@ -1628,7 +1651,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzRlMzllZGM4YzBkNTBmNmQ5Y2UwNGMiLCJmaXJzdF9uYW1lIjoiSmF2aWVyIEFsZXhhbmRlciIsImxhc3RfbmFtZSI6Ik1vcmFsZXMgTWVsYXJhIiwiZHVpIjoiMDU5MDQ2NjktNyIsImlzc3MiOiIiLCJhZnAiOiIiLCJiaXJ0aGRheSI6bnVsbCwicGhvbmVfbnVtYmVyIjpbIig1MDMpNzI3MC05NzI1IiwiKDUwMyk2MDIwLTg4MTIiXSwiZW1haWwiOiJqYXZpZXJtb3JhbGVzbWVsYXJhQGdtYWlsLmNvbSIsImFkZHJlc3MiOiIiLCJkZXBhcnRtZW50IjoiNjM0MmM1OWU1YjQ5NmRkZDcxYzFjMGZkIiwibXVuaWNpcGFsaXR5IjoiNjM0MmM2ZTI1YjQ5NmRkZDcxYzFjMTA4IiwidXNlciI6eyJfaWQiOiI2MzRlMzQ1NzZlZWUwNjhiYTY1YjczNTQiLCJ1c2VybmFtZSI6Imphdmllci5tb3JhbGVzIiwidHlwZSI6IkFETUlOIn0sImlzX2FjdGl2ZSI6dHJ1ZSwiY3JlYXRlZEF0IjoiMjAyMi0xMC0xOFQwNTozMDoyMS43MjVaIiwidXBkYXRlZEF0IjoiMjAyMi0xMC0xOVQwMjo1ODoxNS40NzBaIiwiaWF0IjoxNjY3NDA2NDM1LCJleHAiOjE2NjgwMTEyMzV9.HBqgxi39RK15_sV9vfkCBOslvVgah6AR4ffiL_FkxpI",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzRlMzllZGM4YzBkNTBmNmQ5Y2UwNGMiLCJmaXJzdF9uYW1lIjoiSmF2aWVyIEFsZXhhbmRlciIsImxhc3RfbmFtZSI6Ik1vcmFsZXMgTWVsYXJhIiwiZHVpIjoiMDU5MDQ2NjktNyIsImlzc3MiOiIiLCJhZnAiOiIiLCJiaXJ0aGRheSI6bnVsbCwicGhvbmVfbnVtYmVyIjpbIig1MDMpNzI3MC05NzI1IiwiKDUwMyk2MDIwLTg4MTIiXSwiZW1haWwiOiJqYXZpZXJtb3JhbGVzbWVsYXJhQGdtYWlsLmNvbSIsImFkZHJlc3MiOiIiLCJkZXBhcnRtZW50IjoiNjM0MmM1OWU1YjQ5NmRkZDcxYzFjMGZkIiwibXVuaWNpcGFsaXR5IjoiNjM0MmM2ZTI1YjQ5NmRkZDcxYzFjMTA4IiwidXNlciI6eyJfaWQiOiI2MzRlMzQ1NzZlZWUwNjhiYTY1YjczNTQiLCJ1c2VybmFtZSI6Imphdmllci5tb3JhbGVzIiwidHlwZSI6IkFETUlOIn0sImlzX2FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjY3NzgxMjI2LCJleHAiOjE2NjgzODYwMjZ9.QR1pvJtWdAaw45Z-aqNQmEZsSR3PIV81Dz2gKCx5kKA",
 				"type": "string"
 			}
 		]
