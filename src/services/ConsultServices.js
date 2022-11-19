@@ -7,9 +7,10 @@ import AppointmentModel from '../models/AppointmentModel.js'
 export async function getAll(req, res) {
   try {
     let query = {}
-    const { status, date } = req.query
+    const { status, date, patient } = req.query
     if (status) query = { ...query, status }
     if (date) query = { ...query, date }
+    if (patient) query = { ...query, patient }
     const _data = await ConsultModel.find(query)
       .populate('prev_appointment', {
         name: 0,
