@@ -65,6 +65,8 @@ const consultSchema = Schema(
 )
 consultSchema.methods.toJSON = function () {
   var obj = this.toObject()
+  // FORMAT IN SPANISH STATUS
+  obj._status = getStatusNameInSpanish(obj.status)
   delete obj.createdAt
   delete obj.updatedAt
   return obj
@@ -72,3 +74,18 @@ consultSchema.methods.toJSON = function () {
 /* Creating a model called ConsultModel. */
 const ConsultModel = mongoose.model('Consult', consultSchema)
 export default ConsultModel
+
+const getStatusNameInSpanish = (status) => {
+  switch (status) {
+    case 'FINISHED':
+      return 'FINALIZADA'
+    case 'IN PROGRESS':
+      return 'EN PROCESO'
+    case 'PENDING':
+      return 'PENDIENTE'
+    case 'WAITING':
+      return 'EN SALA DE ESPERA'
+    default:
+      return 'DESCONOCIDO'
+  }
+}
