@@ -57,7 +57,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\":\"Keny Lisbeth\",\r\n      \"lastName\": \"Chavez Torres\",\r\n      \"phoneNumber\": [\"7596-8977\", \"6032-8899\"],\r\n      \"birthday\": \"1999-03-20\",\r\n      \"gender\": \"F\",\r\n      \"dui\": \"04256996-7\",\r\n      \"address\": \"Cton El Papalon\",\r\n      \"department\": \"6342c59e5b496ddd71c1c0f7\",\r\n      \"municipality\": \"6342c6e25b496ddd71c1c108\",\r\n      \"maritalStatus\": \"SINGLE\",\r\n      \"bloodType\": \"O-\",\r\n      \"familyHistory\":\"\",\r\n      \"personalHistory\":\"\",\r\n      \"responsibles\":[]\r\n}",
+							"raw": "{\r\n    \"firstName\":\"Edgar Antonio\",\r\n      \"lastName\": \"Reyes Ceron\",\r\n      \"phoneNumber\": [\"7923-1100\"],\r\n      \"birthday\": \"2000-05-17\",\r\n      \"gender\": \"M\",\r\n      \"dui\": \"06784465-1\",\r\n      \"address\": \"Col. La Presita\",\r\n      \"department\": \"6342c59e5b496ddd71c1c103\",\r\n      \"municipality\": \"6342c6e25b496ddd71c1c1ce\",\r\n      \"maritalStatus\": \"SINGLE\",\r\n      \"bloodType\": \"O-\",\r\n      \"familyHistory\":\"\",\r\n      \"personalHistory\":\"\",\r\n      \"responsibles\":[]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -249,9 +249,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/municipalities/code/:code",
+							"raw": "{{SERVER}}/municipalities/code/:code",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"municipalities",
@@ -279,9 +279,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/departments",
+							"raw": "{{SERVER}}/departments",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"departments"
@@ -630,12 +630,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{SERVER}}/consults",
+							"raw": "{{SERVER}}/consults?patient=636c719359d9694bc2ceb7ba",
 							"host": [
 								"{{SERVER}}"
 							],
 							"path": [
 								"consults"
+							],
+							"query": [
+								{
+									"key": "patient",
+									"value": "636c719359d9694bc2ceb7ba"
+								}
 							]
 						}
 					},
@@ -647,9 +653,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/consults/:_id",
+							"raw": "{{SERVER}}/consults/:_id",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"consults",
@@ -658,7 +664,7 @@
 							"variable": [
 								{
 									"key": "_id",
-									"value": "636c71f159d9694bc2ceb7c6"
+									"value": "6378242bacf472a5773441b8"
 								}
 							]
 						}
@@ -987,7 +993,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"javier.morales\",\r\n    \"password\": \"javier123\",\r\n    \"type\": \"ADMIN\"\r\n}",
+							"raw": "{\r\n    \"username\": \"edgar.reyes\",\r\n    \"password\": \"edgar123\",\r\n    \"type\": \"ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -995,9 +1001,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/users",
+							"raw": "{{SERVER}}/users",
 							"host": [
-								"{{HOST}}"
+								"{{SERVER}}"
 							],
 							"path": [
 								"users"
@@ -1143,7 +1149,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Oscar Alexis\",\r\n    \"lastName\": \"Palacios Flores\",\r\n    \"dui\": \"02843123-7\",\r\n    \"department\": \"6342c59e5b496ddd71c1c0fd\",\r\n    \"municipality\": \"6342c6e25b496ddd71c1c108\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Edgar Antonio\",\r\n    \"lastName\": \"Reyes Ceron\",\r\n    \"dui\": \"02848743-7\",\r\n    \"department\": \"6342c59e5b496ddd71c1c0fd\",\r\n    \"municipality\": \"6342c6e25b496ddd71c1c108\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1151,9 +1157,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{SERVER}}/employees",
+							"raw": "{{HOST}}/employees",
 							"host": [
-								"{{SERVER}}"
+								"{{HOST}}"
 							],
 							"path": [
 								"employees"
@@ -1644,6 +1650,28 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "info",
+			"item": [
+				{
+					"name": "getInfo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}/info",
+							"host": [
+								"{{SERVER}}"
+							],
+							"path": [
+								"info"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"auth": {
@@ -1651,7 +1679,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzRlMzllZGM4YzBkNTBmNmQ5Y2UwNGMiLCJmaXJzdF9uYW1lIjoiSmF2aWVyIEFsZXhhbmRlciIsImxhc3RfbmFtZSI6Ik1vcmFsZXMgTWVsYXJhIiwiZHVpIjoiMDU5MDQ2NjktNyIsImlzc3MiOiIiLCJhZnAiOiIiLCJiaXJ0aGRheSI6bnVsbCwicGhvbmVfbnVtYmVyIjpbIig1MDMpNzI3MC05NzI1IiwiKDUwMyk2MDIwLTg4MTIiXSwiZW1haWwiOiJqYXZpZXJtb3JhbGVzbWVsYXJhQGdtYWlsLmNvbSIsImFkZHJlc3MiOiIiLCJkZXBhcnRtZW50IjoiNjM0MmM1OWU1YjQ5NmRkZDcxYzFjMGZkIiwibXVuaWNpcGFsaXR5IjoiNjM0MmM2ZTI1YjQ5NmRkZDcxYzFjMTA4IiwidXNlciI6eyJfaWQiOiI2MzRlMzQ1NzZlZWUwNjhiYTY1YjczNTQiLCJ1c2VybmFtZSI6Imphdmllci5tb3JhbGVzIiwidHlwZSI6IkFETUlOIn0sImlzX2FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjY3NzgxMjI2LCJleHAiOjE2NjgzODYwMjZ9.QR1pvJtWdAaw45Z-aqNQmEZsSR3PIV81Dz2gKCx5kKA",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzRlMzllZGM4YzBkNTBmNmQ5Y2UwNGMiLCJmaXJzdF9uYW1lIjoiSmF2aWVyIEFsZXhhbmRlciIsImxhc3RfbmFtZSI6Ik1vcmFsZXMgTWVsYXJhIiwiZHVpIjoiMDU5MDQ2NjktNyIsImlzc3MiOiIiLCJhZnAiOiIiLCJiaXJ0aGRheSI6bnVsbCwicGhvbmVfbnVtYmVyIjpbIig1MDMpNzI3MC05NzI1IiwiKDUwMyk2MDIwLTg4MTIiXSwiZW1haWwiOiJqYXZpZXJtb3JhbGVzbWVsYXJhQGdtYWlsLmNvbSIsImFkZHJlc3MiOiIiLCJkZXBhcnRtZW50IjoiNjM0MmM1OWU1YjQ5NmRkZDcxYzFjMGZkIiwibXVuaWNpcGFsaXR5IjoiNjM0MmM2ZTI1YjQ5NmRkZDcxYzFjMTA4IiwidXNlciI6eyJfaWQiOiI2MzRlMzQ1NzZlZWUwNjhiYTY1YjczNTQiLCJ1c2VybmFtZSI6Imphdmllci5tb3JhbGVzIiwidHlwZSI6IkFETUlOIn0sImlzX2FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjY4ODE4MDMwLCJleHAiOjE2Njk0MjI4MzB9.0hXB_H477jzSrWPsgHdK9fhjOR0eqEaQ4sfFAW4kzX8",
 				"type": "string"
 			}
 		]
