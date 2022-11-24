@@ -23,7 +23,7 @@ export async function getInfo(req, res) {
     const _consultsByDate = await ConsultModel.aggregate([
       {
         $group: {
-          _id: { $dateToString: { format: '%Y-%m-%d', date: '$date' } },
+          _id: { $dateToString: { format: '%Y-%m', date: '$date' } },
           count: { $sum: 1 }
         }
       },
