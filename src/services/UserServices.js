@@ -108,7 +108,7 @@ export async function auth(req, res) {
     }
     //Get the employee with this user
     const _employee = await EmployeeModel.findOne({ user: _user._id }).populate(
-      'user',
+      'user', 
       { password: 0, status: 0, createdAt: 0, updatedAt: 0 }
     )
     const tokenId = createToken(_employee)

@@ -30,6 +30,8 @@ import MedicineController from './controllers/MedicineController.js'
 import MovementController from './controllers/MovementController.js'
 import DiagnosticController from './controllers/DiagnosticController.js'
 import InfoController from './controllers/InfoController.js'
+import ParamController from "./controllers/ParamController.js";
+import CompanyController from "./controllers/CompanyController.js";
 
 /**
  * REQUIRED CONSTANTS
@@ -55,6 +57,8 @@ app.use(cors())
 /**
  * ENDPOINTS TO SET THE RESPECTIVE CONTROLLER
  */
+app.use('/api/params', ParamController)
+app.use('/api/companies', CompanyController)
 app.use('/api/patients', PatientController)
 app.use('/api/municipalities', MunicipalityController)
 app.use('/api/departments', DepartmentController)
