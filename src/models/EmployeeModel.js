@@ -58,6 +58,11 @@ const employeeSchema = Schema(
     is_active: {
       type: Boolean,
       default: true
+    },
+    company: {
+      type: Schema.Types.ObjectId,
+      ref: 'Company',
+      required: true
     }
   },
   { timestamps: true, versionKey: false }

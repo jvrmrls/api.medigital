@@ -5,10 +5,14 @@ import EmployeeModel from '../models/EmployeeModel.js'
 
 export async function getAll(req, res) {
   try {
-    const _data = await EmployeeModel.find({}).populate('user', {
-      password: 0,
-      status: 0
-    })
+    const _data = await EmployeeModel.find({})
+      .populate('user', {
+        password: 0,
+        status: 0
+      })
+      .populate('company', {
+        name: 1
+      })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {
@@ -24,10 +28,14 @@ export async function getSpecific(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
-    const _data = await EmployeeModel.findOne({ _id }).populate('user', {
-      password: 0,
-      status: 0
-    })
+    const _data = await EmployeeModel.findOne({ _id })
+      .populate('user', {
+        password: 0,
+        status: 0
+      })
+      .populate('company', {
+        name: 1
+      })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {
@@ -35,6 +43,7 @@ export async function getSpecific(req, res) {
     return res.status(500).json(err)
   }
 }
+
 export async function create(req, res) {
   try {
     const errors = validationResult(req)
@@ -56,6 +65,7 @@ export async function create(req, res) {
       user,
       isActive
     } = req.body
+    const { company } = req.user
     const _employee = {
       first_name: firstName,
       last_name: lastName,
@@ -69,6 +79,7 @@ export async function create(req, res) {
       department,
       municipality,
       user,
+      company,
       is_active: isActive
     }
     const _data = EmployeeModel(_.omitBy(_employee, _.isNull))
