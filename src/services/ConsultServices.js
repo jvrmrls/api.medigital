@@ -7,11 +7,12 @@ import AppointmentModel from '../models/AppointmentModel.js'
 export async function getAll(req, res) {
   try {
     let query = {}
+    const { company } = req
     const { status, date, patient } = req.query
     if (status) query = { ...query, status }
     if (date) query = { ...query, date }
     if (patient) query = { ...query, patient }
-    const _data = await ConsultModel.find(query)
+    const _data = await ConsultModel.find({  ...query, company  })
       .populate('prev_appointment', {
         name: 0,
         observations: 0,
@@ -73,6 +74,7 @@ export async function create(req, res) {
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() })
     }
+    const { company } = req
     const { date, patient, doctor, reason, observations, prevAppointment } =
       req.body
     const _consult = ConsultModel({
@@ -81,7 +83,8 @@ export async function create(req, res) {
       doctor,
       reason,
       observations,
-      prev_appointment: prevAppointment !== '' ? prevAppointment : null
+      prev_appointment: prevAppointment !== '' ? prevAppointment : null,
+      company
     })
     await _consult.save()
     if (prevAppointment) {

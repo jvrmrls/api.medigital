@@ -27,6 +27,11 @@ const medicineSchema = Schema(
     quantity: {
       type: Number,
       default: 0
+    },
+    company: {
+      type: Schema.Types.ObjectId,
+      ref: 'Company',
+      required: true
     }
   },
   { timestamps: true, versionKey: false }

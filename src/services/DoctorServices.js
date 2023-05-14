@@ -5,13 +5,10 @@ import DoctorModel from '../models/DoctorModel.js'
 
 export async function getAll(req, res) {
   try {
-    const _data = await DoctorModel.find({}).populate('employee', {
-      isActive: 0,
-      phoneNumber: 0,
-      address: 0,
-      department: 0,
-      municipality: 0,
-      birthday: 0
+    const _data = await DoctorModel.find({}).populate({
+      path: 'employee',
+      select: 'first_name last_name dui phone_number email company',
+      populate: { path: 'company', select: 'name' }
     })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
@@ -28,13 +25,10 @@ export async function getSpecific(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
-    const _data = await DoctorModel.findOne({ _id }).populate('employee', {
-      isActive: 0,
-      phoneNumber: 0,
-      address: 0,
-      department: 0,
-      municipality: 0,
-      birthday: 0
+    const _data = await DoctorModel.findOne({ _id }).populate({
+      path: 'employee',
+      select: 'first_name last_name dui phone_number email company',
+      populate: { path: 'company', select: 'name' }
     })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
@@ -43,6 +37,7 @@ export async function getSpecific(req, res) {
     return res.status(500).json(err)
   }
 }
+
 export async function create(req, res) {
   try {
     const errors = validationResult(req)

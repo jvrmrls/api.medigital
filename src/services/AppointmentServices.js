@@ -9,10 +9,11 @@ import AppointmentModel from '../models/AppointmentModel.js'
 export async function getAll(req, res) {
   try {
     let query = {}
+    const { company } = req
     const { booked_by, date } = req.query
     if (booked_by) query = { ...query, booked_by: req.user._id }
     if (date) query = { ...query, date }
-    const _data = await AppointmentModel.find(query)
+    const _data = await AppointmentModel.find({...query, company})
       .sort({ date: 'ASC' })
       .populate('booked_by', {
         _id: 0,
@@ -35,8 +36,9 @@ export async function getSpecific(req, res) {
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() })
     }
+    const { company } = req
     const { _id } = req.params
-    const _data = await AppointmentModel.findOne({ _id }).populate(
+    const _data = await AppointmentModel.findOne({ _id, company }).populate(
       'booked_by',
       {
         _id: 0,
@@ -59,6 +61,7 @@ export async function create(req, res) {
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() })
     }
+    const { company } = req
     const { name, reason, date, hour, observations, status } = req.body
     const _appointment = AppointmentModel({
       name: name?.toUpperCase(),
@@ -67,7 +70,8 @@ export async function create(req, res) {
       hour,
       observations: observations?.toUpperCase(),
       booked_by: req.user._id,
-      status
+      status,
+      company
     })
     await _appointment.save()
     return res.status(201).json(_appointment)
@@ -130,13 +134,15 @@ export async function getAvailable(req, res) {
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() })
     }
+    const { company } = req
     const { date } = req.query
     const _appointments = await AppointmentModel.find({
       date: {
         $gte: moment(date).startOf('day'),
         $lte: moment(date).endOf('day')
       },
-      status: 'PENDING'
+      status: 'PENDING',
+      company
     }).select({ hour: 1, _id: 0 })
     // VERIFY THE AVAILABLE
     const _available = businessHours.map((element) => {
@@ -159,7 +165,6 @@ export async function getAvailable(req, res) {
       .status(200)
       .json({ date, morningBusinessHours, afternoonBusinessHours })
   } catch (err) {
-    console.log(err)
     /* Returning the response to the client. */
     return res.status(500).json(err)
   }
@@ -167,12 +172,14 @@ export async function getAvailable(req, res) {
 
 export async function getTomorrowAppointments() {
   try {
+    const { company } = req
     const _appointments = await AppointmentModel.find({
       date: {
         $gte: moment().add(1, 'days').format('YYYY-MM-DD'),
         $lte: moment().add(2, 'days').format('YYYY-MM-DD')
       },
-      status: 'PENDING'
+      status: 'PENDING',
+      company
     })
       .populate('booked_by', { email: 1, first_name: 1 })
       .select({ booked_by: 1, reason: 1, date: 1, hour: 1 })

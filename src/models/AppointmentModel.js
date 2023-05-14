@@ -33,6 +33,11 @@ const appointmentSchema = Schema(
       type: String,
       enum: ['PENDING', 'WAITING', 'IN PROGRESS', 'FINISHED', 'CANCELED'],
       default: 'PENDING'
+    },
+    company: {
+      type: Schema.Types.ObjectId,
+      ref: 'Company',
+      required: true
     }
   },
   { timestamps: true, versionKey: false }

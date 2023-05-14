@@ -4,6 +4,10 @@ const { Schema } = mongoose;
 
 const companySchema = Schema(
     {
+        code: {
+            type: String,
+            required: true
+        },
         name: {
             type: String,
             required: true

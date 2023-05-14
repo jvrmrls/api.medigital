@@ -59,6 +59,11 @@ const consultSchema = Schema(
       type: String,
       enum: ['WAITING', 'IN PROGRESS', 'FINISHED', 'CANCELED'],
       default: 'WAITING'
+    },
+    company: {
+      type: Schema.Types.ObjectId,
+      ref: 'Company',
+      required: true
     }
   },
   { timestamps: true, versionKey: false }

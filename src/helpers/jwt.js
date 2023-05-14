@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken'
 
 const _SECRET = process.env.JWT_SECRET_KEY
 const _EXPIRES_IN = process.env.JWT_EXPIRES_IN
+const _COMPANY = process.env.COMPANY
 /**
  * This function takes in a data object, converts it to JSON, and then signs it
  * with the secret key.
@@ -31,6 +32,7 @@ const authenticateToken = (req, res, next) => {
   jwt.verify(token, _SECRET, (err, user) => {
     if (err) return res.sendStatus(403)
     req.user = user
+    req.company = user?.company ?? _COMPANY
     next()
   })
 }

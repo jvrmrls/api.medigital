@@ -5,7 +5,8 @@ import EmployeeModel from '../models/EmployeeModel.js'
 
 export async function getAll(req, res) {
   try {
-    const _data = await EmployeeModel.find({})
+    const { company } = req
+    const _data = await EmployeeModel.find({company})
       .populate('user', {
         password: 0,
         status: 0
@@ -15,7 +16,7 @@ export async function getAll(req, res) {
       })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
-  } catch (err) {
+  } catch (err) {console.log(err)
     /* Returning the response to the client. */
     return res.status(500).json(err)
   }
@@ -28,7 +29,8 @@ export async function getSpecific(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
-    const _data = await EmployeeModel.findOne({ _id })
+    const { company } = req
+    const _data = await EmployeeModel.findOne({ _id, company })
       .populate('user', {
         password: 0,
         status: 0
