@@ -32,7 +32,7 @@ import DiagnosticController from './controllers/DiagnosticController.js'
 import InfoController from './controllers/InfoController.js'
 import ParamController from "./controllers/ParamController.js";
 import CompanyController from "./controllers/CompanyController.js";
-
+import ToolController from './controllers/ToolController.js'
 /**
  * REQUIRED CONSTANTS
  **/
@@ -73,6 +73,7 @@ app.use('/api/medicines', MedicineController)
 app.use('/api/movements', MovementController)
 app.use('/api/diagnostics', DiagnosticController)
 app.use('/api/info', InfoController)
+app.use('/api/tools', ToolController)
 
 /**
  * LISTENING APP
