@@ -29,7 +29,6 @@ export async function getAll(req, res) {
                 delete tool._doc.url
                 return tool
             }
-            //* If the tool doesn't have children return tool
             return tool
         })
 

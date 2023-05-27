@@ -16,7 +16,10 @@ const userSchema = Schema(
       type: String,
       enum: ['NORMAL', 'ADMIN'],
       default: 'NORMAL'
-    },
+    }, profile_picture: {
+        type: String,
+          default: ''
+      },
     status: {
       type: String,
       enum: ['ACTIVE', 'INACTIVE', 'SUSPENDED', 'BLOCKED'],

@@ -12,6 +12,7 @@ import express from 'express'
 import 'dotenv/config'
 import cors from 'cors'
 import cron from 'node-cron'
+import fileUpload from 'express-fileupload'
 
 import conn from './database/mongo.js'
 import PatientController from './controllers/PatientController.js'
@@ -30,8 +31,8 @@ import MedicineController from './controllers/MedicineController.js'
 import MovementController from './controllers/MovementController.js'
 import DiagnosticController from './controllers/DiagnosticController.js'
 import InfoController from './controllers/InfoController.js'
-import ParamController from "./controllers/ParamController.js";
-import CompanyController from "./controllers/CompanyController.js";
+import ParamController from './controllers/ParamController.js'
+import CompanyController from './controllers/CompanyController.js'
 import ToolController from './controllers/ToolController.js'
 /**
  * REQUIRED CONSTANTS
@@ -54,6 +55,11 @@ conn()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
+app.use(
+  fileUpload({
+    limits: { fileSize: 50 * 1024 * 1024 }
+  })
+)
 /**
  * ENDPOINTS TO SET THE RESPECTIVE CONTROLLER
  */

@@ -6,7 +6,8 @@ import {
   create,
   update,
   deleteSpecific,
-  auth
+  auth,
+  changeProfilePicture
 } from '../services/UserServices.js'
 import { authenticateToken } from '../helpers/jwt.js'
 
@@ -54,4 +55,8 @@ router.post(
   body('password').notEmpty().withMessage('La contraseña es requerida'),
   auth
 )
+
+// POST /api/users/change-profile-picture
+router.post('/change-profile-picture', authenticateToken, changeProfilePicture)
+
 export default router
