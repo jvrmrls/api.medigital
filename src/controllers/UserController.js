@@ -7,7 +7,8 @@ import {
   update,
   deleteSpecific,
   auth,
-  changeProfilePicture
+  changeProfilePicture,
+  getOwnInfo
 } from '../services/UserServices.js'
 import { authenticateToken } from '../helpers/jwt.js'
 
@@ -15,6 +16,8 @@ const router = Router()
 
 // GET /api/users/
 router.get('/', authenticateToken, getAll)
+// GET /api/users/own-info
+router.get('/own-info', authenticateToken, getOwnInfo)
 // GET /api/users/:id
 router.get(
   '/:_id',

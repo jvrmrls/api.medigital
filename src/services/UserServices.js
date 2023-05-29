@@ -7,7 +7,7 @@ import EmployeeModel from '../models/EmployeeModel.js'
 // Import JWT helper
 import { createToken } from '../helpers/jwt.js'
 import { uploadImage } from '../helpers/uploads.js'
-import {getInitialsFromName, getShortName} from "../helpers/format.js";
+import { getInitialsFromName, getShortName } from '../helpers/format.js'
 
 export async function getAll(req, res) {
   try {
@@ -114,16 +114,22 @@ export async function auth(req, res) {
       { password: 0, status: 0, createdAt: 0, updatedAt: 0 }
     )
     //* If the user has no employee assigned, return an error.
-    if(!_employee){
-        return res.status(400).json({ msg: 'Usuario sin empleado asignado' })
+    if (!_employee) {
+      return res.status(400).json({ msg: 'Usuario sin empleado asignado' })
     }
     const tokenId = createToken(_employee)
     const nameToShow = getShortName(_employee?.first_name, _employee?.last_name)
     return res.status(200).json({
       credential: tokenId,
       name: nameToShow,
-      initials: getInitialsFromName(_employee?.first_name, _employee?.last_name),
-        profile_picture: _user?.profile_picture
+      initials: getInitialsFromName(
+        _employee?.first_name,
+        _employee?.last_name
+      ),
+      profile_picture:
+        _user?.profile_picture !== ''
+          ? _user?.profile_picture
+          : process.env.DEFAULT_AVATAR
     })
   } catch (err) {
     /* Returning the response to the client. */
@@ -136,19 +142,29 @@ const verifyPassword = (pass, hash) => {
 }
 
 export async function changeProfilePicture(req, res) {
-  try{
+  try {
     const { _id, username } = req?.user?.user
-    if(!_id || !username) return res.status(400).json({ msg: 'No se ha podido obtener el usuario' })
+    if (!_id || !username)
+      return res.status(400).json({ msg: 'No se ha podido obtener el usuario' })
     const file = req.files.file
     // Create the base64 string
     const base64 = file.data.toString('base64')
     //* Create a request to the cloudinary server.
-    const _upload = await uploadImage(base64, file.name, `${username}.${_id}`, 'profile')
+    const _upload = await uploadImage(
+      base64,
+      file.name,
+      `${username}.${_id}`,
+      'profile'
+    )
 
     //* Update the user profile picture
-    const _user = await UserModel.findByIdAndUpdate(_id, { profile_picture: _upload.url }, { new: true })
-    return res.status(200).json(_user)
-  } catch(err) {
+    const _user = await UserModel.findByIdAndUpdate(
+      _id,
+      { profile_picture: _upload.url },
+      { new: true }
+    )
+    return res.status(200).json({ profile_picture: _user.profile_picture })
+  } catch (err) {
     return res.status(500).json(err)
   }
 }
@@ -161,6 +177,25 @@ export async function upload(req, res) {
     //* Create a request to the cloudinary server.
     const _data = await uploadImage(base64, file.name, 'test', 'small')
     return res.status(200).json(_data)
+  } catch (err) {
+    return res.status(500).json(err)
+  }
+}
+
+export async function getOwnInfo(req, res) {
+  try {
+    const { _id } = req?.user?.user
+    const _user = await UserModel.findOne(
+      { _id },
+      { password: 0, status: 0, createdAt: 0, updatedAt: 0 }
+    )
+    // Get the employee data if exists
+    const _employee = await EmployeeModel.findOne({ user: _id },{ createdAt: 0, updatedAt: 0, user: 0, is_active: 0 })
+                                          .populate('company', {name: 1})
+                                          .populate('municipality', {name: 1})
+                                          .populate('department', {name: 1})
+    const response = { user: _user, employee: _employee }
+    return res.status(200).json(response)
   } catch (err) {
     return res.status(500).json(err)
   }
