@@ -10,10 +10,15 @@ export async function getAll(req, res) {
   try {
     let query = {}
     const { company } = req
-    const { booked_by, date } = req.query
+    const { booked_by, date, status } = req.query
     if (booked_by) query = { ...query, booked_by: req.user._id }
-    if (date) query = { ...query, date }
-    const _data = await AppointmentModel.find({...query, company})
+    if (date) query = { ...query, date:  { $gte: moment(date).startOf('day'), $lte: moment(date).endOf('day') } }
+    if (status) {
+      query = { ...query, status }
+    } else {
+      query = { ...query, status: 'PENDING' }
+    }
+    const _data = await AppointmentModel.find({ ...query, company: company })
       .sort({ date: 'ASC' })
       .populate('booked_by', {
         _id: 0,
