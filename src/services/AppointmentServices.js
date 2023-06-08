@@ -13,23 +13,19 @@ export async function getAll(req, res) {
     const { booked_by, date, status } = req.query
     if (booked_by) query = { ...query, booked_by: req.user._id }
     if (date) query = { ...query, date:  { $gte: moment(date).startOf('day'), $lte: moment(date).endOf('day') } }
-    if (status) {
-      query = { ...query, status }
-    } else {
-      query = { ...query, status: 'PENDING' }
-    }
+    if (status) query = { ...query, status }
+    
     const _data = await AppointmentModel.find({ ...query, company: company })
-      .sort({ date: 'ASC' })
+      .sort({ date: 'ASC', hour: 'ASC'})
       .populate('booked_by', {
         _id: 0,
         password: 0,
-        platform: 0,
         createdAt: 0,
         updatedAt: 0
       })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
-  } catch (err) {
+  } catch (err) {console.log(err)
     /* Returning the response to the client. */
     return res.status(500).json(err)
   }
@@ -67,12 +63,13 @@ export async function create(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     const { company } = req
-    const { name, reason, date, hour, observations, status } = req.body
+    const { name, reason, date, hour,dui, observations, status } = req.body
     const _appointment = AppointmentModel({
       name: name?.toUpperCase(),
       reason: reason?.toUpperCase(),
       date,
       hour,
+      dui,
       observations: observations?.toUpperCase(),
       booked_by: req.user._id,
       status,
@@ -93,12 +90,13 @@ export async function update(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
-    const { name, reason, date, hour, observations, status } = req.body
+    const { name, reason, date, hour,dui, observations, status } = req.body
     const _appointment = {
       name: name?.toUpperCase(),
       reason: reason?.toUpperCase(),
       date,
       hour,
+      dui,
       observations: observations?.toUpperCase(),
       status
     }

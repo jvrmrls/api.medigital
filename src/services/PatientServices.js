@@ -4,6 +4,7 @@ import _ from 'lodash'
 
 // Import model
 import PatientModel from '../models/PatientModel.js'
+import ConsultModel from '../models/ConsultModel.js'
 
 /**
  * It's a function that returns a response to the client.
@@ -216,6 +217,40 @@ export async function deleteResponsible(req, res) {
     /* Returning the response to the client. */
     return res.status(200).json(_patient)
   } catch (err) {
+    /* Returning the response to the client. */
+    return res.status(500).json(err)
+  }
+}
+
+export async function getAllInfoByDui(req, res) {
+  try {
+    /* A query to the database. */
+    const { dui } = req.params
+    const { company } = req
+    const duiFormat = (dui?.length === 9) ? `${dui.slice(0, 8)}-${dui.slice(8)}` : dui
+    const _patient = await PatientModel.findOne({ dui: duiFormat })
+      .populate('department', { _id: 0 })
+      .populate('municipality', { cantons: 0, _id: 0, postalCode: 0 })
+    if (!_patient)
+      return res.status(400).json({ msg: 'No se encontró el paciente' })
+    /* If exists patient, get the history of consults */
+    const _consults = await ConsultModel.find({ patient: _patient._id, company })
+      .select('-patient -status -_id -company -createdAt -updatedAt -__v')
+      .sort({ date: -1 })
+      .populate('diagnostic', { _id: 0 })
+
+    
+
+    const response = {
+      patient: _patient,
+      consults: _consults,
+      notes: [],
+      documents: []
+    }
+    /* Returning the response to the client. */
+    return res.status(200).json(response)
+  } catch (err) {
+    console.log(err)
     /* Returning the response to the client. */
     return res.status(500).json(err)
   }

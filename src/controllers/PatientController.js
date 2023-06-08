@@ -7,7 +7,7 @@ import {
   update,
   deleteSpecific,
   addResponsible,
-  deleteResponsible
+  deleteResponsible, getAllInfoByDui
 } from '../services/PatientServices.js'
 import { authenticateToken } from '../helpers/jwt.js'
 
@@ -15,6 +15,8 @@ const router = Router()
 
 // GET /api/patients/
 router.get('/', authenticateToken, getAll)
+// GET /api/patients/all-info/:dui
+router.get('/all-info/:dui', authenticateToken, getAllInfoByDui)
 // GET /api/patients/:id
 router.get('/:_id', authenticateToken, getSpecific)
 // POST /api/patients/

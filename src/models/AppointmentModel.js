@@ -16,6 +16,10 @@ const appointmentSchema = Schema(
       type: String,
       required: true
     },
+    dui: {
+      type: String,
+      default: ''
+    },
     reason: {
       type: String,
       required: true
