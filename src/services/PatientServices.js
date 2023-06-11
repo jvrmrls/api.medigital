@@ -238,9 +238,10 @@ export async function getAllInfoByDui(req, res) {
       .select('-patient -status -_id -company -createdAt -updatedAt -__v')
       .sort({ date: -1 })
       .populate('diagnostic', { _id: 0 })
-
-    
-
+      .populate({ path: 'doctor', populate: {
+        path: 'employee',
+        select: 'first_name last_name specialties -_id'
+      }})
     const response = {
       patient: _patient,
       consults: _consults,

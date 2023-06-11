@@ -81,6 +81,27 @@ patientSchema.methods.toJSON = function () {
   var obj = this.toObject()
   delete obj.createdAt
   delete obj.updatedAt
+  // Set the marital status in spanish
+  switch (obj.marital_status) {
+    case 'MARRIED':
+      obj.marital_status = 'Casado/a'
+      break
+    case 'WIDOWED':
+      obj.marital_status = 'Viudo/a'
+      break
+    case 'SEPARATED':
+      obj.marital_status = 'Separado/a'
+      break
+    case 'DIVORCED':
+      obj.marital_status = 'Divorciado/a'
+      break
+    case 'SINGLE':
+      obj.marital_status = 'Soltero/a'
+      break
+    case 'N/D':
+      obj.marital_status = 'No definido'
+      break
+  }
   return obj
 }
 /* Creating a model called Patient. */

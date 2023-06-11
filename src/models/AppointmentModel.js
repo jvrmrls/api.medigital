@@ -51,6 +51,8 @@ appointmentSchema.methods.toJSON = function () {
   var obj = this.toObject()
   delete obj.createdAt
   delete obj.updatedAt
+  //* If appointment doesn't have the DUI, add the default value
+  if(obj.dui === '') obj.dui = '000000000'
   return obj
 }
 /* Creating a model called AppointmentModel. */
