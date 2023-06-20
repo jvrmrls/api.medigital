@@ -25,9 +25,9 @@ export async function getAll(req, res) {
         path: 'doctor',
         populate: {
           path: 'employee',
-          select: { first_name: 1, last_name: 1, specialties: 1 }
+          select: { first_name: 1, last_name: 1, }
         },
-        select: { employee: 1 }
+        select: { employee: 1 ,  specialties: 1}
       })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
