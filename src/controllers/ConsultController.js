@@ -5,7 +5,9 @@ import {
   getSpecific,
   create,
   update,
-  deleteSpecific
+  deleteSpecific,
+  startSpecific,
+  cancelSpecific
 } from '../services/ConsultServices.js'
 import { authenticateToken } from '../helpers/jwt.js'
 
@@ -29,6 +31,23 @@ router.post(
   body('doctor').isMongoId().withMessage('El ID de doctor no es válido'),
   create
 )
+
+// PUT /api/consults/:_id/start-specific
+router.put(
+  '/:_id/start-specific',
+  authenticateToken,
+  param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
+  startSpecific
+)
+
+// PUT /api/consults/:_id/cancel-specific
+router.put(
+  '/:_id/cancel-specific',
+  authenticateToken,
+  param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
+  cancelSpecific
+)
+
 // PUT /api/consults/:_id
 router.put(
   '/:_id',

@@ -86,8 +86,8 @@ const getStatusNameInSpanish = (status) => {
       return 'FINALIZADA'
     case 'IN PROGRESS':
       return 'EN PROCESO'
-    case 'PENDING':
-      return 'PENDIENTE'
+    case 'CANCELED':
+      return 'CANCELADA'
     case 'WAITING':
       return 'EN SALA DE ESPERA'
     default:

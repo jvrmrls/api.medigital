@@ -153,6 +153,40 @@ export async function update(req, res) {
   }
 }
 
+export async function startSpecific(req, res) {
+  try {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() })
+    }
+    const { _id } = req.params
+
+    const _data = await ConsultModel.findByIdAndUpdate( _id, { status: 'IN PROGRESS' }, { new: true })
+    if (!_data) return res.status(400).json({ msg: 'No se encontró la consulta' })
+    return res.status(200).json(_data)
+  } catch (err) {
+    /* Returning the response to the client. */
+    return res.status(500).json(err)
+  }
+}
+
+export async function cancelSpecific(req, res) {
+  try {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() })
+    }
+    const { _id } = req.params
+
+    const _data = await ConsultModel.findByIdAndUpdate( _id, { status: 'CANCELED' }, { new: true })
+    if (!_data) return res.status(400).json({ msg: 'No se encontró la consulta' })
+    return res.status(200).json(_data)
+  } catch (err) {
+    /* Returning the response to the client. */
+    return res.status(500).json(err)
+  }
+}
+
 export async function deleteSpecific(req, res) {
   try {
     const errors = validationResult(req)
