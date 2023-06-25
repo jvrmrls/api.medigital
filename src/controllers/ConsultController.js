@@ -7,7 +7,8 @@ import {
   update,
   deleteSpecific,
   startSpecific,
-  cancelSpecific
+  cancelSpecific,
+  continueSpecific
 } from '../services/ConsultServices.js'
 import { authenticateToken } from '../helpers/jwt.js'
 
@@ -46,6 +47,14 @@ router.put(
   authenticateToken,
   param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
   cancelSpecific
+)
+
+// PUT /api/consults/:_id/continue-specific
+router.put(
+  '/:_id/continue-specific',
+  authenticateToken,
+  param('_id').isMongoId().withMessage('El ID no es del formato correcto'),
+  continueSpecific
 )
 
 // PUT /api/consults/:_id

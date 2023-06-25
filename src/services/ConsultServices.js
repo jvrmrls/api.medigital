@@ -1,5 +1,6 @@
 import { validationResult } from 'express-validator'
 import _ from 'lodash'
+import moment from 'moment'
 // Import model
 import ConsultModel from '../models/ConsultModel.js'
 import AppointmentModel from '../models/AppointmentModel.js'
@@ -29,6 +30,7 @@ export async function getAll(req, res) {
         },
         select: { employee: 1 ,  specialties: 1}
       })
+      .sort({ date: -1 })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
   } catch (err) {
@@ -59,6 +61,7 @@ export async function getSpecific(req, res) {
         },
         select: { employee: 1 }
       })
+      .sort({ date: -1 })
     if (!_data) return res.status(400).json({ msg: 'No se encontró la cita' })
     /* Returning the response to the client. */
     return res.status(200).json(_data)
@@ -160,8 +163,9 @@ export async function startSpecific(req, res) {
       return res.status(422).json({ errors: errors.array() })
     }
     const { _id } = req.params
+    const start_hour = moment().format('HH:mm')
 
-    const _data = await ConsultModel.findByIdAndUpdate( _id, { status: 'IN PROGRESS' }, { new: true })
+    const _data = await ConsultModel.findByIdAndUpdate( _id, { status: 'IN PROGRESS', start_hour }, { new: true })
     if (!_data) return res.status(400).json({ msg: 'No se encontró la consulta' })
     return res.status(200).json(_data)
   } catch (err) {
@@ -179,6 +183,27 @@ export async function cancelSpecific(req, res) {
     const { _id } = req.params
 
     const _data = await ConsultModel.findByIdAndUpdate( _id, { status: 'CANCELED' }, { new: true })
+    if (!_data) return res.status(400).json({ msg: 'No se encontró la consulta' })
+    return res.status(200).json(_data)
+  } catch (err) {
+    /* Returning the response to the client. */
+    return res.status(500).json(err)
+  }
+}
+
+export async function continueSpecific(req, res) {
+  try {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() })
+    }
+    const { _id } = req.params
+
+    const _data = await ConsultModel.findByIdAndUpdate( _id, { 
+      status: 'WAITING',
+      start_hour: "",
+      end_hour: ""
+    }, { new: true })
     if (!_data) return res.status(400).json({ msg: 'No se encontró la consulta' })
     return res.status(200).json(_data)
   } catch (err) {
