@@ -1,6 +1,6 @@
 import { validationResult } from 'express-validator'
 import _ from 'lodash'
-import moment from 'moment'
+import moment from 'moment-timezone'
 // Import business hours
 import { businessHours } from '../helpers/info.js'
 // Import model
@@ -178,8 +178,8 @@ export async function getTomorrowAppointments() {
     const { company } = req
     const _appointments = await AppointmentModel.find({
       date: {
-        $gte: moment().add(1, 'days').format('YYYY-MM-DD'),
-        $lte: moment().add(2, 'days').format('YYYY-MM-DD')
+        $gte: moment().tz(process.env.TIMEZONE).add(1, 'days').format('YYYY-MM-DD'),
+        $lte: moment().tz(process.env.TIMEZONE).add(2, 'days').format('YYYY-MM-DD')
       },
       status: 'PENDING',
       company

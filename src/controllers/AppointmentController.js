@@ -11,7 +11,6 @@ import {
 } from '../services/AppointmentServices.js'
 import { authenticateToken } from '../helpers/jwt.js'
 import nodemailer from 'nodemailer'
-import moment from 'moment'
 
 const router = Router()
 

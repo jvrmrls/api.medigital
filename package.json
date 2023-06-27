@@ -39,7 +39,7 @@
     "google-auth-library": "^8.5.2",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
-    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "mongoose": "^6.6.5",
     "node-cron": "^3.0.2",
     "nodemailer": "^6.8.0",
