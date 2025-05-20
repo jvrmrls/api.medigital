@@ -5,7 +5,7 @@ import axios from 'axios'
 import CommonUserModel from '../models/CommonUserModel.js'
 
 // Import JWT helper
-import { createToken } from '../helpers/jwt.js'
+import { createToken, createRefreshToken } from '../helpers/jwt.js'
 
 export async function getAll(req, res) {
   try {
@@ -104,7 +104,6 @@ export async function auth(req, res) {
         _commonUser = await CommonUserModel.findOne({ email })
         if (!_commonUser)
           return res.status(400).json({ msg: 'Usuario no existe' })
-
         isVerified = true
         email = _commonUser.email
         firstName = _commonUser.first_name
@@ -144,12 +143,14 @@ export async function auth(req, res) {
     }
 
     // CREATE THE TOKEN
-    const _token = createToken(_commonUser)
+    const _token = createToken(_commonUser?.toJSON())
+    const _refreshToken = createRefreshToken(_commonUser)
     return res.status(200).json({
       credential: _token,
       avatar: _commonUser.avatar,
       fullName: `${_commonUser.first_name} ${_commonUser.last_name}`,
-      email: _commonUser.email
+      email: _commonUser.email,
+      refresh: _refreshToken
     })
   } catch (err) {
     /* Returning the response to the client. */
@@ -220,4 +221,3 @@ const verifyLoginWithFacebook = async (tokenId) => {
       .catch((err) => reject(err))
   })
 }
-

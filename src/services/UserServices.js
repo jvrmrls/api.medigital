@@ -117,7 +117,7 @@ export async function auth(req, res) {
     if (!_employee) {
       return res.status(400).json({ msg: 'Usuario sin empleado asignado' })
     }
-    const tokenId = createToken(_employee)
+    const tokenId = createToken(_employee?.toJSON())
     const nameToShow = getShortName(_employee?.first_name, _employee?.last_name)
     return res.status(200).json({
       credential: tokenId,
@@ -190,10 +190,13 @@ export async function getOwnInfo(req, res) {
       { password: 0, status: 0, createdAt: 0, updatedAt: 0 }
     )
     // Get the employee data if exists
-    const _employee = await EmployeeModel.findOne({ user: _id },{ createdAt: 0, updatedAt: 0, user: 0, is_active: 0 })
-                                          .populate('company', {name: 1})
-                                          .populate('municipality', {name: 1})
-                                          .populate('department', {name: 1})
+    const _employee = await EmployeeModel.findOne(
+      { user: _id },
+      { createdAt: 0, updatedAt: 0, user: 0, is_active: 0 }
+    )
+      .populate('company', { name: 1 })
+      .populate('municipality', { name: 1 })
+      .populate('department', { name: 1 })
     const response = { user: _user, employee: _employee }
     return res.status(200).json(response)
   } catch (err) {
